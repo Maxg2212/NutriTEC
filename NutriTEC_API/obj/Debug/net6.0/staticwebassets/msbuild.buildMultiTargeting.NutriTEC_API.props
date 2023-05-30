@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\NutriTEC_API.props" />
+</Project>
