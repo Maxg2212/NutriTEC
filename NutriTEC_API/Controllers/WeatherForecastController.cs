@@ -29,5 +29,18 @@ namespace NutriTEC_API.Controllers
             })
             .ToArray();
         }
+
+
+        [HttpGet(Name = "GetTest")]
+        public async Task<ActionResult<string>> GetTest()
+        {
+            string retorno= "Test de API";
+            return Ok(retorno);
+        }
+
+
     }
+
+
+
 }
