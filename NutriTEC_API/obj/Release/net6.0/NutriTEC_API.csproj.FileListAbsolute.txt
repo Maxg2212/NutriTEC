@@ -84,3 +84,25 @@ C:\Users\r_mon\OneDrive\Escritorio\Proyecto 2 Bases de Datos PostGre\NutriTEC\Nu
 C:\Users\r_mon\OneDrive\Escritorio\Proyecto 2 Bases de Datos PostGre\NutriTEC\NutriTEC_API\obj\Release\net6.0\NutriTEC_API.pdb
 C:\Users\r_mon\OneDrive\Escritorio\Proyecto 2 Bases de Datos PostGre\NutriTEC\NutriTEC_API\obj\Release\net6.0\NutriTEC_API.genruntimeconfig.cache
 C:\Users\r_mon\OneDrive\Escritorio\Proyecto 2 Bases de Datos PostGre\NutriTEC\NutriTEC_API\obj\Release\net6.0\ref\NutriTEC_API.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Humanizer.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Mono.TextTemplating.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Npgsql.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\System.CodeDom.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\System.Text.Encodings.Web.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\System.Text.Json.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="IIS Web Application Name" description="" value="NutriTEC-API-Proy2" tags="IisApp">
+  <parameter name="IIS Web Application Name" description="" value="NutriTEC-API-PG" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\maxga\\OneDrive\\Documentos\\Cursos\ CE\\Bases\ de\ Datos\ S1\.2023\\Proyecto2\\NutriTEC\\NutriTEC_API\\obj\\Release\\net6\.0\\PubTmp\\Out\\$" />
   </parameter>
 </parameters>
