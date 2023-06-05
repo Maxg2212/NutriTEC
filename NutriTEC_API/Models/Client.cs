@@ -5,11 +5,11 @@ namespace NutriTEC_API.Models;
 
 public partial class Client
 {
-    public string Clientid { get; set; } = null!;
+    public string ClientId { get; set; } = null!;
 
     public string Name { get; set; } = null!;
 
-    public string? Secondname { get; set; }
+    public string? SecondName { get; set; }
 
     public string Lname1 { get; set; } = null!;
 
@@ -23,23 +23,19 @@ public partial class Client
 
     public string Email { get; set; } = null!;
 
-    public string Bdate { get; set; } = null!;
+    public DateOnly Bdate { get; set; }
 
-    public string Muslcepercentage { get; set; } = null!;
+    public string MuslcePercentage { get; set; } = null!;
 
-    public string Fatpercentage { get; set; } = null!;
+    public string FatPercentage { get; set; } = null!;
 
-    public string Hipsize { get; set; } = null!;
+    public string HipSize { get; set; } = null!;
 
-    public string Waistsize { get; set; } = null!;
+    public string WaistSize { get; set; } = null!;
 
-    public string Necksize { get; set; } = null!;
+    public string NeckSize { get; set; } = null!;
 
-    public string? Lastmonthmeas { get; set; }
+    public string? LastMonthMeas { get; set; }
 
-    public virtual ICollection<Dailyconsumption> Dailyconsumptions { get; set; } = new List<Dailyconsumption>();
-
-    public virtual ICollection<Invoice> Invoiceidcs { get; set; } = new List<Invoice>();
-
-    public virtual ICollection<Nutritionist> Nutritionists { get; set; } = new List<Nutritionist>();
+    public virtual ICollection<DailyConsumption> DailyConsumptions { get; set; } = new List<DailyConsumption>();
 }

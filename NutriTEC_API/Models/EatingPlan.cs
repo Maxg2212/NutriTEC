@@ -3,21 +3,17 @@ using System.Collections.Generic;
 
 namespace NutriTEC_API.Models;
 
-public partial class Eatingplan
+public partial class EatingPlan
 {
-    public string Eatplanid { get; set; } = null!;
+    public string EatplanId { get; set; } = null!;
 
-    public string Nutritionistname { get; set; } = null!;
+    public string NutritionistName { get; set; } = null!;
 
     public string Quantity { get; set; } = null!;
 
-    public string? Eatingschedule { get; set; }
+    public string? EatingSchedule { get; set; }
 
-    public string? Startperiod { get; set; }
+    public string? StartPeriod { get; set; }
 
-    public string? Endingperiod { get; set; }
-
-    public virtual ICollection<Productdish> Barcodes { get; set; } = new List<Productdish>();
-
-    public virtual ICollection<Nutritionist> Nutritionists { get; set; } = new List<Nutritionist>();
+    public string? EndingPeriod { get; set; }
 }

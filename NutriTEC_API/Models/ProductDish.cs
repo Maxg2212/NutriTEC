@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NutriTEC_API.Models;
 
-public partial class Productdish
+public partial class ProductDish
 {
     public string Barcode { get; set; } = null!;
 
@@ -15,7 +15,7 @@ public partial class Productdish
 
     public string? Description { get; set; }
 
-    public string Portionsize { get; set; } = null!;
+    public string PortionSize { get; set; } = null!;
 
     public string Energy { get; set; } = null!;
 
@@ -29,9 +29,5 @@ public partial class Productdish
 
     public int State { get; set; }
 
-    public virtual ICollection<Dailyconsumption> Dailyconsumptions { get; set; } = new List<Dailyconsumption>();
-
-    public virtual ICollection<Eatingplan> Eatplans { get; set; } = new List<Eatingplan>();
-
-    public virtual ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
+    public virtual ICollection<DailyConsumption> DailyConsumptions { get; set; } = new List<DailyConsumption>();
 }

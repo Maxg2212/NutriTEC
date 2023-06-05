@@ -17,19 +17,31 @@ public partial class Proyecto2nutritecContext : DbContext
 
     public virtual DbSet<Admin> Admins { get; set; }
 
+    public virtual DbSet<AdminRecipe> AdminRecipes { get; set; }
+
     public virtual DbSet<Client> Clients { get; set; }
 
-    public virtual DbSet<Dailyconsumption> Dailyconsumptions { get; set; }
+    public virtual DbSet<ClientNutritionist> ClientNutritionists { get; set; }
 
-    public virtual DbSet<Eatingplan> Eatingplans { get; set; }
+    public virtual DbSet<DailyConsumption> DailyConsumptions { get; set; }
+
+    public virtual DbSet<EatingPlan> EatingPlans { get; set; }
 
     public virtual DbSet<Invoice> Invoices { get; set; }
 
+    public virtual DbSet<InvoiceClient> InvoiceClients { get; set; }
+
     public virtual DbSet<Nutritionist> Nutritionists { get; set; }
 
-    public virtual DbSet<Paymenttype> Paymenttypes { get; set; }
+    public virtual DbSet<NutritionistPlan> NutritionistPlans { get; set; }
 
-    public virtual DbSet<Productdish> Productdishes { get; set; }
+    public virtual DbSet<PaymentType> PaymentTypes { get; set; }
+
+    public virtual DbSet<ProductDish> ProductDishes { get; set; }
+
+    public virtual DbSet<ProductPlan> ProductPlans { get; set; }
+
+    public virtual DbSet<ProductRecipe> ProductRecipes { get; set; }
 
     public virtual DbSet<Recipe> Recipes { get; set; }
 
@@ -53,189 +65,213 @@ public partial class Proyecto2nutritecContext : DbContext
                 .HasColumnName("password");
         });
 
+        modelBuilder.Entity<AdminRecipe>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("admin_recipe");
+
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasColumnName("email");
+            entity.Property(e => e.RecipeId)
+                .HasMaxLength(100)
+                .HasColumnName("recipe_id");
+
+            entity.HasOne(d => d.EmailNavigation).WithMany()
+                .HasForeignKey(d => d.Email)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_ar_recipe");
+
+            entity.HasOne(d => d.Recipe).WithMany()
+                .HasForeignKey(d => d.RecipeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_ar_admin");
+        });
+
         modelBuilder.Entity<Client>(entity =>
         {
-            entity.HasKey(e => e.Clientid).HasName("client_pkey");
+            entity.HasKey(e => e.ClientId).HasName("client_pkey");
 
             entity.ToTable("client");
 
-            entity.Property(e => e.Clientid)
+            entity.Property(e => e.ClientId)
                 .HasMaxLength(100)
-                .HasColumnName("clientid");
-            entity.Property(e => e.Bdate)
-                .HasMaxLength(100)
-                .HasColumnName("bdate");
+                .HasColumnName("client_id");
+            entity.Property(e => e.Bdate).HasColumnName("bdate");
             entity.Property(e => e.Bmi)
                 .HasMaxLength(100)
                 .HasColumnName("bmi");
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasColumnName("email");
-            entity.Property(e => e.Fatpercentage)
+            entity.Property(e => e.FatPercentage)
                 .HasMaxLength(100)
-                .HasColumnName("fatpercentage");
-            entity.Property(e => e.Hipsize)
+                .HasColumnName("fat_percentage");
+            entity.Property(e => e.HipSize)
                 .HasMaxLength(100)
-                .HasColumnName("hipsize");
-            entity.Property(e => e.Lastmonthmeas)
+                .HasColumnName("hip_size");
+            entity.Property(e => e.LastMonthMeas)
                 .HasMaxLength(100)
-                .HasColumnName("lastmonthmeas");
+                .HasColumnName("last_month_meas");
             entity.Property(e => e.Lname1)
                 .HasMaxLength(100)
                 .HasColumnName("lname1");
             entity.Property(e => e.Lname2)
                 .HasMaxLength(100)
                 .HasColumnName("lname2");
-            entity.Property(e => e.Muslcepercentage)
+            entity.Property(e => e.MuslcePercentage)
                 .HasMaxLength(100)
-                .HasColumnName("muslcepercentage");
+                .HasColumnName("muslce_percentage");
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .HasColumnName("name");
-            entity.Property(e => e.Necksize)
+            entity.Property(e => e.NeckSize)
                 .HasMaxLength(100)
-                .HasColumnName("necksize");
+                .HasColumnName("neck_size");
             entity.Property(e => e.Password)
                 .HasMaxLength(100)
                 .HasColumnName("password");
-            entity.Property(e => e.Secondname)
+            entity.Property(e => e.SecondName)
                 .HasMaxLength(100)
-                .HasColumnName("secondname");
-            entity.Property(e => e.Waistsize)
+                .HasColumnName("second_name");
+            entity.Property(e => e.WaistSize)
                 .HasMaxLength(100)
-                .HasColumnName("waistsize");
+                .HasColumnName("waist_size");
             entity.Property(e => e.Weight)
                 .HasMaxLength(100)
                 .HasColumnName("weight");
-
-            entity.HasMany(d => d.Invoiceidcs).WithMany(p => p.Idclients)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Invoiceclient",
-                    r => r.HasOne<Invoice>().WithMany()
-                        .HasForeignKey("Invoiceidc")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_ic_invoice"),
-                    l => l.HasOne<Client>().WithMany()
-                        .HasForeignKey("Idclient")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_ic_client"),
-                    j =>
-                    {
-                        j.HasKey("Idclient", "Invoiceidc").HasName("invoiceclient_pkey");
-                        j.ToTable("invoiceclient");
-                        j.IndexerProperty<string>("Idclient")
-                            .HasMaxLength(100)
-                            .HasColumnName("idclient");
-                        j.IndexerProperty<string>("Invoiceidc")
-                            .HasMaxLength(100)
-                            .HasColumnName("invoiceidc");
-                    });
-
-            entity.HasMany(d => d.Nutritionists).WithMany(p => p.Clients)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ClientNutritionist",
-                    r => r.HasOne<Nutritionist>().WithMany()
-                        .HasForeignKey("Nutritionistid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_cn_nutritionist"),
-                    l => l.HasOne<Client>().WithMany()
-                        .HasForeignKey("Clientid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_cn_client"),
-                    j =>
-                    {
-                        j.HasKey("Clientid", "Nutritionistid").HasName("client_nutritionist_pkey");
-                        j.ToTable("client_nutritionist");
-                        j.IndexerProperty<string>("Clientid")
-                            .HasMaxLength(100)
-                            .HasColumnName("clientid");
-                        j.IndexerProperty<string>("Nutritionistid")
-                            .HasMaxLength(100)
-                            .HasColumnName("nutritionistid");
-                    });
         });
 
-        modelBuilder.Entity<Dailyconsumption>(entity =>
+        modelBuilder.Entity<ClientNutritionist>(entity =>
         {
-            entity.HasKey(e => new { e.Barcode, e.Clientid }).HasName("dailyconsumption_pkey");
+            entity
+                .HasNoKey()
+                .ToTable("client_nutritionist");
 
-            entity.ToTable("dailyconsumption");
+            entity.Property(e => e.ClientId)
+                .HasMaxLength(100)
+                .HasColumnName("client_id");
+            entity.Property(e => e.NutritionistId)
+                .HasMaxLength(100)
+                .HasColumnName("nutritionist_id");
+
+            entity.HasOne(d => d.Client).WithMany()
+                .HasForeignKey(d => d.ClientId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_cn_client");
+
+            entity.HasOne(d => d.Nutritionist).WithMany()
+                .HasForeignKey(d => d.NutritionistId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_cn_nutritionist");
+        });
+
+        modelBuilder.Entity<DailyConsumption>(entity =>
+        {
+            entity.HasKey(e => new { e.Barcode, e.ClientId }).HasName("daily_consumption_pkey");
+
+            entity.ToTable("daily_consumption");
 
             entity.Property(e => e.Barcode)
                 .HasMaxLength(100)
                 .HasColumnName("barcode");
-            entity.Property(e => e.Clientid)
+            entity.Property(e => e.ClientId)
                 .HasMaxLength(100)
-                .HasColumnName("clientid");
+                .HasColumnName("client_id");
             entity.Property(e => e.Datec).HasColumnName("datec");
-            entity.Property(e => e.Eatingtime)
+            entity.Property(e => e.EatingTime)
                 .HasMaxLength(100)
-                .HasColumnName("eatingtime");
+                .HasColumnName("eating_time");
 
-            entity.HasOne(d => d.BarcodeNavigation).WithMany(p => p.Dailyconsumptions)
+            entity.HasOne(d => d.BarcodeNavigation).WithMany(p => p.DailyConsumptions)
                 .HasForeignKey(d => d.Barcode)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_dc_product");
 
-            entity.HasOne(d => d.Client).WithMany(p => p.Dailyconsumptions)
-                .HasForeignKey(d => d.Clientid)
+            entity.HasOne(d => d.Client).WithMany(p => p.DailyConsumptions)
+                .HasForeignKey(d => d.ClientId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_dc_client");
         });
 
-        modelBuilder.Entity<Eatingplan>(entity =>
+        modelBuilder.Entity<EatingPlan>(entity =>
         {
-            entity.HasKey(e => e.Eatplanid).HasName("eatingplan_pkey");
+            entity.HasKey(e => e.EatplanId).HasName("eating_plan_pkey");
 
-            entity.ToTable("eatingplan");
+            entity.ToTable("eating_plan");
 
-            entity.Property(e => e.Eatplanid)
+            entity.Property(e => e.EatplanId)
                 .HasMaxLength(100)
-                .HasColumnName("eatplanid");
-            entity.Property(e => e.Eatingschedule)
+                .HasColumnName("eatplan_id");
+            entity.Property(e => e.EatingSchedule)
                 .HasMaxLength(100)
-                .HasColumnName("eatingschedule");
-            entity.Property(e => e.Endingperiod)
+                .HasColumnName("eating_schedule");
+            entity.Property(e => e.EndingPeriod)
                 .HasMaxLength(100)
-                .HasColumnName("endingperiod");
-            entity.Property(e => e.Nutritionistname)
+                .HasColumnName("ending_period");
+            entity.Property(e => e.NutritionistName)
                 .HasMaxLength(100)
-                .HasColumnName("nutritionistname");
+                .HasColumnName("nutritionist_name");
             entity.Property(e => e.Quantity)
                 .HasMaxLength(100)
                 .HasColumnName("quantity");
-            entity.Property(e => e.Startperiod)
+            entity.Property(e => e.StartPeriod)
                 .HasMaxLength(100)
-                .HasColumnName("startperiod");
+                .HasColumnName("start_period");
         });
 
         modelBuilder.Entity<Invoice>(entity =>
         {
-            entity.HasKey(e => e.Invoiceid).HasName("invoice_pkey");
+            entity.HasKey(e => e.InvoiceId).HasName("invoice_pkey");
 
             entity.ToTable("invoice");
 
-            entity.Property(e => e.Invoiceid)
+            entity.Property(e => e.InvoiceId)
                 .HasMaxLength(100)
-                .HasColumnName("invoiceid");
-            entity.Property(e => e.Indescription)
+                .HasColumnName("invoice_id");
+            entity.Property(e => e.InDescription)
                 .HasMaxLength(100)
-                .HasColumnName("indescription");
-            entity.Property(e => e.Invoicedate).HasColumnName("invoicedate");
-            entity.Property(e => e.Payamount)
+                .HasColumnName("in_description");
+            entity.Property(e => e.InvoiceDate).HasColumnName("invoice_date");
+            entity.Property(e => e.PayAmount)
                 .HasMaxLength(100)
-                .HasColumnName("payamount");
+                .HasColumnName("pay_amount");
+        });
+
+        modelBuilder.Entity<InvoiceClient>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("invoice_client");
+
+            entity.Property(e => e.IdClient)
+                .HasMaxLength(100)
+                .HasColumnName("id_client");
+            entity.Property(e => e.InvoiceIdc)
+                .HasMaxLength(100)
+                .HasColumnName("invoice_idc");
+
+            entity.HasOne(d => d.IdClientNavigation).WithMany()
+                .HasForeignKey(d => d.IdClient)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_ic_client");
+
+            entity.HasOne(d => d.InvoiceIdcNavigation).WithMany()
+                .HasForeignKey(d => d.InvoiceIdc)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_ic_invoice");
         });
 
         modelBuilder.Entity<Nutritionist>(entity =>
         {
-            entity.HasKey(e => e.Employeeid).HasName("nutritionist_pkey");
+            entity.HasKey(e => e.EmployeeId).HasName("nutritionist_pkey");
 
             entity.ToTable("nutritionist");
 
-            entity.Property(e => e.Employeeid)
+            entity.Property(e => e.EmployeeId)
                 .HasMaxLength(100)
-                .HasColumnName("employeeid");
+                .HasColumnName("employee_id");
             entity.Property(e => e.Address)
                 .HasMaxLength(100)
                 .HasColumnName("address");
@@ -245,9 +281,12 @@ public partial class Proyecto2nutritecContext : DbContext
             entity.Property(e => e.Bmi)
                 .HasMaxLength(100)
                 .HasColumnName("bmi");
-            entity.Property(e => e.Creditcard)
+            entity.Property(e => e.CreditCard)
                 .HasMaxLength(100)
-                .HasColumnName("creditcard");
+                .HasColumnName("credit_card");
+            entity.Property(e => e.Discount)
+                .HasPrecision(5, 2)
+                .HasColumnName("discount");
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasColumnName("email");
@@ -260,76 +299,74 @@ public partial class Proyecto2nutritecContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .HasColumnName("name");
-            entity.Property(e => e.Nutritionistcode)
+            entity.Property(e => e.NutritionistCode)
                 .HasMaxLength(100)
-                .HasColumnName("nutritionistcode");
-            entity.Property(e => e.Nutritionistid)
-                .HasMaxLength(100)
-                .HasColumnName("nutritionistid");
+                .HasColumnName("nutritionist_code");
             entity.Property(e => e.Password)
                 .HasMaxLength(100)
                 .HasColumnName("password");
-            entity.Property(e => e.Paymenttype)
+            entity.Property(e => e.PaymentType)
                 .HasMaxLength(100)
-                .HasColumnName("paymenttype");
-            entity.Property(e => e.Profilepic)
+                .HasColumnName("payment_type");
+            entity.Property(e => e.ProfilePic)
                 .HasMaxLength(1000)
-                .HasColumnName("profilepic");
-            entity.Property(e => e.Secondname)
+                .HasColumnName("profile_pic");
+            entity.Property(e => e.SecondName)
                 .HasMaxLength(100)
-                .HasColumnName("secondname");
+                .HasColumnName("second_name");
             entity.Property(e => e.Weight)
                 .HasMaxLength(100)
                 .HasColumnName("weight");
 
-            entity.HasMany(d => d.Eatplans).WithMany(p => p.Nutritionists)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Nutritionistplan",
-                    r => r.HasOne<Eatingplan>().WithMany()
-                        .HasForeignKey("Eatplanid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_np_plan"),
-                    l => l.HasOne<Nutritionist>().WithMany()
-                        .HasForeignKey("Nutritionistid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_np_product"),
-                    j =>
-                    {
-                        j.HasKey("Nutritionistid", "Eatplanid").HasName("nutritionistplan_pkey");
-                        j.ToTable("nutritionistplan");
-                        j.IndexerProperty<string>("Nutritionistid")
-                            .HasMaxLength(100)
-                            .HasColumnName("nutritionistid");
-                        j.IndexerProperty<string>("Eatplanid")
-                            .HasMaxLength(100)
-                            .HasColumnName("eatplanid");
-                    });
-        });
-
-        modelBuilder.Entity<Paymenttype>(entity =>
-        {
-            entity.HasKey(e => new { e.Ptypeid, e.Description }).HasName("paymenttype_pkey");
-
-            entity.ToTable("paymenttype");
-
-            entity.Property(e => e.Ptypeid)
-                .HasMaxLength(100)
-                .HasColumnName("ptypeid");
-            entity.Property(e => e.Description)
-                .HasMaxLength(100)
-                .HasColumnName("description");
-
-            entity.HasOne(d => d.Ptype).WithMany(p => p.Paymenttypes)
-                .HasForeignKey(d => d.Ptypeid)
+            entity.HasOne(d => d.PaymentTypeNavigation).WithMany(p => p.Nutritionists)
+                .HasForeignKey(d => d.PaymentType)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_pt");
         });
 
-        modelBuilder.Entity<Productdish>(entity =>
+        modelBuilder.Entity<NutritionistPlan>(entity =>
         {
-            entity.HasKey(e => e.Barcode).HasName("productdish_pkey");
+            entity
+                .HasNoKey()
+                .ToTable("nutritionist_plan");
 
-            entity.ToTable("productdish");
+            entity.Property(e => e.EatplanId)
+                .HasMaxLength(100)
+                .HasColumnName("eatplan_id");
+            entity.Property(e => e.NutritionistId)
+                .HasMaxLength(100)
+                .HasColumnName("nutritionist_id");
+
+            entity.HasOne(d => d.Eatplan).WithMany()
+                .HasForeignKey(d => d.EatplanId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_np_plan");
+
+            entity.HasOne(d => d.Nutritionist).WithMany()
+                .HasForeignKey(d => d.NutritionistId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_np_product");
+        });
+
+        modelBuilder.Entity<PaymentType>(entity =>
+        {
+            entity.HasKey(e => e.PtypeId).HasName("payment_type_pkey");
+
+            entity.ToTable("payment_type");
+
+            entity.Property(e => e.PtypeId)
+                .HasMaxLength(100)
+                .HasColumnName("ptype_id");
+            entity.Property(e => e.Description)
+                .HasMaxLength(100)
+                .HasColumnName("description");
+        });
+
+        modelBuilder.Entity<ProductDish>(entity =>
+        {
+            entity.HasKey(e => e.Barcode).HasName("product_dish_pkey");
+
+            entity.ToTable("product_dish");
 
             entity.Property(e => e.Barcode)
                 .HasMaxLength(100)
@@ -352,9 +389,9 @@ public partial class Proyecto2nutritecContext : DbContext
             entity.Property(e => e.Iron)
                 .HasMaxLength(100)
                 .HasColumnName("iron");
-            entity.Property(e => e.Portionsize)
+            entity.Property(e => e.PortionSize)
                 .HasMaxLength(100)
-                .HasColumnName("portionsize");
+                .HasColumnName("portion_size");
             entity.Property(e => e.Protein)
                 .HasMaxLength(100)
                 .HasColumnName("protein");
@@ -365,63 +402,65 @@ public partial class Proyecto2nutritecContext : DbContext
             entity.Property(e => e.Vitamins)
                 .HasMaxLength(100)
                 .HasColumnName("vitamins");
+        });
 
-            entity.HasMany(d => d.Eatplans).WithMany(p => p.Barcodes)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Productplan",
-                    r => r.HasOne<Eatingplan>().WithMany()
-                        .HasForeignKey("Eatplanid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_pp_plan"),
-                    l => l.HasOne<Productdish>().WithMany()
-                        .HasForeignKey("Barcode")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_pp_product"),
-                    j =>
-                    {
-                        j.HasKey("Barcode", "Eatplanid").HasName("productplan_pkey");
-                        j.ToTable("productplan");
-                        j.IndexerProperty<string>("Barcode")
-                            .HasMaxLength(100)
-                            .HasColumnName("barcode");
-                        j.IndexerProperty<string>("Eatplanid")
-                            .HasMaxLength(100)
-                            .HasColumnName("eatplanid");
-                    });
+        modelBuilder.Entity<ProductPlan>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("product_plan");
 
-            entity.HasMany(d => d.Recipes).WithMany(p => p.Barcodes)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Productrecipe",
-                    r => r.HasOne<Recipe>().WithMany()
-                        .HasForeignKey("Recipeid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_pr_recipe"),
-                    l => l.HasOne<Productdish>().WithMany()
-                        .HasForeignKey("Barcode")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_pr_product"),
-                    j =>
-                    {
-                        j.HasKey("Barcode", "Recipeid").HasName("productrecipe_pkey");
-                        j.ToTable("productrecipe");
-                        j.IndexerProperty<string>("Barcode")
-                            .HasMaxLength(100)
-                            .HasColumnName("barcode");
-                        j.IndexerProperty<string>("Recipeid")
-                            .HasMaxLength(100)
-                            .HasColumnName("recipeid");
-                    });
+            entity.Property(e => e.Barcode)
+                .HasMaxLength(100)
+                .HasColumnName("barcode");
+            entity.Property(e => e.EatplanId)
+                .HasMaxLength(100)
+                .HasColumnName("eatplan_id");
+
+            entity.HasOne(d => d.BarcodeNavigation).WithMany()
+                .HasForeignKey(d => d.Barcode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_pp_product");
+
+            entity.HasOne(d => d.Eatplan).WithMany()
+                .HasForeignKey(d => d.EatplanId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_pp_plan");
+        });
+
+        modelBuilder.Entity<ProductRecipe>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("product_recipe");
+
+            entity.Property(e => e.Barcode)
+                .HasMaxLength(100)
+                .HasColumnName("barcode");
+            entity.Property(e => e.RecipeId)
+                .HasMaxLength(100)
+                .HasColumnName("recipe_id");
+
+            entity.HasOne(d => d.BarcodeNavigation).WithMany()
+                .HasForeignKey(d => d.Barcode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_pr_product");
+
+            entity.HasOne(d => d.Recipe).WithMany()
+                .HasForeignKey(d => d.RecipeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_pr_recipe");
         });
 
         modelBuilder.Entity<Recipe>(entity =>
         {
-            entity.HasKey(e => e.Recipeid).HasName("recipe_pkey");
+            entity.HasKey(e => e.RecipeId).HasName("recipe_pkey");
 
             entity.ToTable("recipe");
 
-            entity.Property(e => e.Recipeid)
+            entity.Property(e => e.RecipeId)
                 .HasMaxLength(100)
-                .HasColumnName("recipeid");
+                .HasColumnName("recipe_id");
             entity.Property(e => e.Calories)
                 .HasMaxLength(100)
                 .HasColumnName("calories");
@@ -431,29 +470,6 @@ public partial class Proyecto2nutritecContext : DbContext
             entity.Property(e => e.Portions)
                 .HasMaxLength(100)
                 .HasColumnName("portions");
-
-            entity.HasMany(d => d.Emails).WithMany(p => p.Recipes)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Adminrecipe",
-                    r => r.HasOne<Admin>().WithMany()
-                        .HasForeignKey("Email")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_ar_recipe"),
-                    l => l.HasOne<Recipe>().WithMany()
-                        .HasForeignKey("Recipeid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_ar_admin"),
-                    j =>
-                    {
-                        j.HasKey("Recipeid", "Email").HasName("adminrecipe_pkey");
-                        j.ToTable("adminrecipe");
-                        j.IndexerProperty<string>("Recipeid")
-                            .HasMaxLength(100)
-                            .HasColumnName("recipeid");
-                        j.IndexerProperty<string>("Email")
-                            .HasMaxLength(100)
-                            .HasColumnName("email");
-                    });
         });
 
         OnModelCreatingPartial(modelBuilder);
