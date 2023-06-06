@@ -6,7 +6,7 @@ namespace NutriTEC_API.Controllers
 {
     [ApiController]
     [Route("api/")]
-    public class AdminController: ControllerBase
+    public class AdminController : ControllerBase
     {
         private readonly Proyecto2nutritecContext _context;
 
@@ -14,6 +14,7 @@ namespace NutriTEC_API.Controllers
         {
             _context = context;
         }
+
         [HttpPost("auth_admin")]
         public async Task<ActionResult<JSON_Object>> AuthAdmin(Credentials Admin_Credentials)
         {
@@ -32,5 +33,85 @@ namespace NutriTEC_API.Controllers
             }
 
         }
+
+        [HttpPut("change_state_product_dish")]
+        public async Task<ActionResult<JSON_Object>> ChangeState(ProductDishData ProductDishData)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.ProductDishStates.FromSqlInterpolated($"select * from change_product_state({ProductDishData.barcode},{ProductDishData.state})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].change_product_state == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+                
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+        [HttpPost("get_aproved_product_dish")]
+        public async Task<ActionResult<JSON_Object>> GetAproved()
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.AllProductDishes.FromSqlInterpolated($"select * from get_aproved_products()");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result.Count == 0)
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                json.status = "ok";
+                json.result = PGSQL_result;
+                return Ok(json);
+                
+            }
+        }
+
+        [HttpPost("get_unaproved_product_dish")]
+        public async Task<ActionResult<JSON_Object>> GetUnaproved()
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.AllProductDishes.FromSqlInterpolated($"select * from get_unaproved_products()");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result.Count == 0)
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                json.status = "ok";
+                json.result = PGSQL_result;
+                return Ok(json);
+
+            }
+        }
+
+        [HttpPost("get_all_products_dishes")]
+        public async Task<ActionResult<JSON_Object>> GetAllProducts()
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.AllProductDishes.FromSqlInterpolated($"select * from get_all_products()");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result.Count == 0)
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                json.status = "ok";
+                json.result = PGSQL_result;
+                return Ok(json);
+
+            }
+        }
+
     }
 }

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace NutriTEC_API.Models;
-
 public partial class ProductDish
 {
     public string Barcode { get; set; } = null!;
