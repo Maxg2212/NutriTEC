@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NutriTEC_API.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,8 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
+builder.Services.AddDbContext<Proyecto2nutritecContext>(options => 
+options.UseNpgsql(builder.Configuration.GetConnectionString("NutriTecPsqlContext")));
 
 
 builder.Services.AddEndpointsApiExplorer();

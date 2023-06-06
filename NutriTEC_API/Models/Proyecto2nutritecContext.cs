@@ -45,6 +45,10 @@ public partial class Proyecto2nutritecContext : DbContext
 
     public virtual DbSet<Recipe> Recipes { get; set; }
 
+    public virtual DbSet<LoginClient> LoginClients { get; set; }
+
+    public virtual DbSet<LoginNutritionist> LoginNutritionists { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseNpgsql("Host=nutritec-posgresql-db.postgres.database.azure.com;Database=proyecto2nutritec;Username=dlurena24;Password=Max12345");
@@ -275,9 +279,7 @@ public partial class Proyecto2nutritecContext : DbContext
             entity.Property(e => e.Address)
                 .HasMaxLength(100)
                 .HasColumnName("address");
-            entity.Property(e => e.Bdate)
-                .HasMaxLength(100)
-                .HasColumnName("bdate");
+            entity.Property(e => e.Bdate).HasColumnName("bdate");
             entity.Property(e => e.Bmi)
                 .HasMaxLength(100)
                 .HasColumnName("bmi");

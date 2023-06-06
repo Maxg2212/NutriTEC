@@ -19,7 +19,7 @@ public partial class Nutritionist
 
     public string Password { get; set; } = null!;
 
-    public string Bdate { get; set; } = null!;
+    public DateOnly Bdate { get; set; }
 
     public string? ProfilePic { get; set; }
 
