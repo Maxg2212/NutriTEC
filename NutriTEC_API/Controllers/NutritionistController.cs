@@ -74,13 +74,30 @@ namespace NutriTEC_API.Controllers
         }
 
         [HttpPost("assign_eating_plan_to_client")]
+        public async Task<ActionResult<JSON_Object>> AssignEatingPlanToClient(EatingPlanToClient eatingPlanToClientEntries)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.AssignEatingPlanClients.FromSqlInterpolated($"select * from assign_eating_plan_to_client({eatingPlanToClientEntries.client_id},{eatingPlanToClientEntries.nutritionist_id},{eatingPlanToClientEntries.eatplan_id})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].assign_eating_plan_to_client == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
 
 
         [HttpPost("assign_daily_consump")]
         public async Task<ActionResult<JSON_Object>> AssignDailyConsumption(DailyConsumptionFunction dailyConsumptionEntries)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.AssignDailyConsumptions.FromSqlInterpolated($"select * from assign_daily_consumption({dailyConsumptionEntries.barcode},{dailyConsumptionEntries.client_id},{dailyConsumptionEntries.eating_time},{dailyConsumptionEntries.datec})");
+            var result = _context.AssignDailyConsumptions.FromSqlInterpolated($"select * from assign_daily_consumption({dailyConsumptionEntries.barcode},{dailyConsumptionEntries.client_id},{dailyConsumptionEntries.eating_time},{DateOnly.ParseExact(dailyConsumptionEntries.datec, "yyyy-MM-dd", CultureInfo.InvariantCulture)})");
             var PGSQL_result = result.ToList();
 
             if (PGSQL_result[0].assign_daily_consumption == 1)
