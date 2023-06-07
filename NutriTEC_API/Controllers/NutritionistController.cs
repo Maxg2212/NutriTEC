@@ -53,5 +53,46 @@ namespace NutriTEC_API.Controllers
                 return BadRequest(json);
             }
         }
+
+        [HttpPost("create_eating_plan")]
+        public async Task<ActionResult<JSON_Object>> AddEatingPlan(EatingPlanFunction eatingPlanEntries)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.InsertEatingPlan.FromSqlInterpolated($"select * from create_eating_plan({eatingPlanEntries.eatplan_id},{eatingPlanEntries.nutritionist_name},{eatingPlanEntries.quantity},{eatingPlanEntries.eating_schedule},{eatingPlanEntries.start_period},{eatingPlanEntries.ending_period})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].create_eating_plan == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+        [HttpPost("assign_eating_plan_to_client")]
+
+
+        [HttpPost("assign_daily_consump")]
+        public async Task<ActionResult<JSON_Object>> AssignDailyConsumption(DailyConsumptionFunction dailyConsumptionEntries)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.AssignDailyConsumptions.FromSqlInterpolated($"select * from assign_daily_consumption({dailyConsumptionEntries.barcode},{dailyConsumptionEntries.client_id},{dailyConsumptionEntries.eating_time},{dailyConsumptionEntries.datec})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].assign_daily_consumption == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
     }
 }

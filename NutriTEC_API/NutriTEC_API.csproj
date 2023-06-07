@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Client\" />
+    <Folder Include="Models\Admin\" />
+    <Folder Include="Models\Nutritionist\" />
     <Folder Include="temporal\" />
   </ItemGroup>
 
