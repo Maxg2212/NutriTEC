@@ -77,15 +77,14 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-        [HttpPost("add_daily_consumption")]
-        public async Task<ActionResult<JSON_Object>> AddDayliConsumption(ClientMeasures Client_Info)
+        [HttpPost("assign_daily_consumption")]
+        public async Task<ActionResult<JSON_Object>> AssignDailyConsumption(DailyConsumptionFunction dailyConsumptionEntries)
         {
-
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.InsertClient.FromSqlInterpolated($"select * from assign_daily_consumption({Client_Info.client_id},{Client_Info.muslce_percentage}, {Client_Info.fat_percentage},{Client_Info.hip_size},{Client_Info.waist_size},{Client_Info.neck_size},{Client_Info.last_month_meas})");
+            var result = _context.AssignDailyConsumptions.FromSqlInterpolated($"select * from assign_daily_consumption({dailyConsumptionEntries.barcode},{dailyConsumptionEntries.client_id},{dailyConsumptionEntries.eating_time},{DateOnly.ParseExact(dailyConsumptionEntries.datec, "yyyy-MM-dd", CultureInfo.InvariantCulture)})");
             var PGSQL_result = result.ToList();
 
-            if (PGSQL_result[0].insert_client == 1)
+            if (PGSQL_result[0].assign_daily_consumption == 1)
             {
                 json.status = "ok";
                 return Ok(json);
