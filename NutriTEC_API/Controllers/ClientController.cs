@@ -56,5 +56,45 @@ namespace NutriTEC_API.Controllers
                 return BadRequest(json);
             }
         }
+
+        [HttpPut("update_measures")]
+        public async Task<ActionResult<JSON_Object>> UpdateMeasures(ClientMeasures Client_Info)
+        {
+
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.InsertClient.FromSqlInterpolated($"select * from update_client_measurements({Client_Info.client_id},{Client_Info.muslce_percentage}, {Client_Info.fat_percentage},{Client_Info.hip_size},{Client_Info.waist_size},{Client_Info.neck_size},{Client_Info.last_month_meas})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].insert_client == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+        [HttpPost("add_daily_consumption")]
+        public async Task<ActionResult<JSON_Object>> AddDayliConsumption(ClientMeasures Client_Info)
+        {
+
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.InsertClient.FromSqlInterpolated($"select * from assign_daily_consumption({Client_Info.client_id},{Client_Info.muslce_percentage}, {Client_Info.fat_percentage},{Client_Info.hip_size},{Client_Info.waist_size},{Client_Info.neck_size},{Client_Info.last_month_meas})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].insert_client == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
     }
 }

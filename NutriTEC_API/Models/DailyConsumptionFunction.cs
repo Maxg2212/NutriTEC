@@ -11,6 +11,6 @@ namespace NutriTEC_API.Models
 
         public string eating_time { get; set; } = string.Empty;
 
-        public DateOnly datec { get; set; }
+        public string datec { get; set; } = string.Empty;
     }
 }

@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Admin\**" />
+    <Compile Remove="Models\Client\**" />
+    <Compile Remove="Models\Nutritionist\**" />
+    <Content Remove="Models\Admin\**" />
+    <Content Remove="Models\Client\**" />
+    <Content Remove="Models\Nutritionist\**" />
+    <EmbeddedResource Remove="Models\Admin\**" />
+    <EmbeddedResource Remove="Models\Client\**" />
+    <EmbeddedResource Remove="Models\Nutritionist\**" />
+    <None Remove="Models\Admin\**" />
+    <None Remove="Models\Client\**" />
+    <None Remove="Models\Nutritionist\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -16,9 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Client\" />
-    <Folder Include="Models\Admin\" />
-    <Folder Include="Models\Nutritionist\" />
     <Folder Include="temporal\" />
   </ItemGroup>
 
