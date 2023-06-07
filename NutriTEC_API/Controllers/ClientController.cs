@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using NutriTEC_API.Models;
 using System.Data;
+using System.Globalization;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
 
@@ -19,6 +20,7 @@ namespace NutriTEC_API.Controllers
         [HttpPost("auth_client")]
         public async Task<ActionResult<JSON_Object>> AuthClient(Credentials Client_Credentials)
         {
+            Client_Credentials.password = MD5Encrypt.EncryptPassword(Client_Credentials.password);
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
             var result = _context.LoginClients.FromSqlInterpolated($"select * from login_client({Client_Credentials.email},{Client_Credentials.password})");
             var PGSQL_result = result.ToList();
@@ -33,6 +35,26 @@ namespace NutriTEC_API.Controllers
                 return Ok(json);
             }
 
+        }
+
+        [HttpPost("add_client")]
+        public async Task<ActionResult<JSON_Object>> AddClient(ClientData Client_Info)
+        {
+            Client_Info.password = MD5Encrypt.EncryptPassword(Client_Info.password);
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.InsertClient.FromSqlInterpolated($"select * from insert_client({Client_Info.client_id},{Client_Info.name}, {Client_Info.second_name},{Client_Info.lname1},{Client_Info.lname2},{Client_Info.weight},{Client_Info.bmi},{Client_Info.password},{Client_Info.email},{DateOnly.ParseExact(Client_Info.bdate, "yyyy-MM-dd", CultureInfo.InvariantCulture)},{Client_Info.muslce_percentage},{Client_Info.fat_percentage},{Client_Info.hip_size},{Client_Info.waist_size},{Client_Info.neck_size},{Client_Info.last_month_meas})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].insert_client == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
         }
     }
 }

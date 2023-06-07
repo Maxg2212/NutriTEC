@@ -18,6 +18,7 @@ namespace NutriTEC_API.Controllers
         [HttpPost("auth_admin")]
         public async Task<ActionResult<JSON_Object>> AuthAdmin(Credentials Admin_Credentials)
         {
+            Admin_Credentials.password = MD5Encrypt.EncryptPassword(Admin_Credentials.password);
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
             var result = _context.LoginAdmins.FromSqlInterpolated($"select * from login_admin({Admin_Credentials.email},{Admin_Credentials.password})");
             var PGSQL_result = result.ToList();
@@ -34,7 +35,27 @@ namespace NutriTEC_API.Controllers
 
         }
 
-        [HttpPut("change_state_product_dish")]
+        [HttpPost("add_admin")]
+        public async Task<ActionResult<JSON_Object>> AddAdmin(Credentials Admin_Credentials)
+        {
+            Admin_Credentials.password = MD5Encrypt.EncryptPassword(Admin_Credentials.password);
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.InsertAdmins.FromSqlInterpolated($"select * from insert_admin({Admin_Credentials.email},{Admin_Credentials.password})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].insert_admin == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+            [HttpPut("change_state_product_dish")]
         public async Task<ActionResult<JSON_Object>> ChangeState(ProductDishData ProductDishData)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.

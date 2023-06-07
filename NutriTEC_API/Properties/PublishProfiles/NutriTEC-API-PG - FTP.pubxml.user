@@ -7,5 +7,8 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAK4lU/HySTkCJ4s+j9B9RIAAAAAACAAAAAAAQZgAAAAEAACAAAAArNQ1QiVjEvytbq0aTHq7ni2TuxGDEZ6qRcdwDvGCxrQAAAAAOgAAAAAIAACAAAABNT9vab7RHMzAuczD9tz3Ku87I6NDuaHQ+WVsVO04YCoAAAAC4af9PZGoPinXclLv2utbpbV0Uw+nXMWNQ09PVl7RtdmNVB7/HYhKwuJAq/kRA0cjXY5kgHs5j+Rkpyo/GTWpu1pkGEEU2oHzVEYMIPRiahUH7OURCg2fQ4OZdvvNl+b5DuW/V+jVQeS3vdSdsP+ASgNRTiwZ8GdZPsGYsKmasB0AAAAA+AwdS4JHKqqCGT3lQMheuWT/xtelKtTsp++afaOk1ilHxgEAW/dv+5IpSqadhNkEzOttLbLVKd3m3eBWJ0Nf+</EncryptedPassword>
+    <_PublishTargetUrl>ftps://waws-prod-blu-233.ftp.azurewebsites.windows.net/site/wwwroot</_PublishTargetUrl>
+    <History>False|2023-06-06T06:53:48.5843653Z;</History>
+    <LastFailureDetails />
   </PropertyGroup>
 </Project>
