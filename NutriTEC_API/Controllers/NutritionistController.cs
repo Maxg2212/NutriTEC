@@ -191,7 +191,7 @@ namespace NutriTEC_API.Controllers
                 return BadRequest(json);
             }
         }
-
+        
         [HttpPost("get_products_by_recipe")]
         public async Task<ActionResult<JSON_Object>> GetProductsByRecipe(RecipeIdentifier recipeIdentifier)
         {
@@ -210,7 +210,7 @@ namespace NutriTEC_API.Controllers
                 return BadRequest(json);
             }
         }
-
+        
         [HttpPost("insert_product_dish")]
         public async Task<ActionResult<JSON_Object>> InsertProductDish(ProductDishInserts productDishInserts)
         {
@@ -231,7 +231,7 @@ namespace NutriTEC_API.Controllers
         }
 
         [HttpPost("nutri_insert_recipe")]
-        public async Task<ActionResult<JSON_Object>> InsertProductRecipe(RecipeInserts recipeInserts)
+        public async Task<ActionResult<JSON_Object>> NutriInsertProductRecipe(RecipeInserts recipeInserts)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
             var result = _context.InsertRecipeFunctions.FromSqlInterpolated($"select * from insert_recipe({recipeInserts.recipe_id},{recipeInserts.portions},{recipeInserts.calories},{recipeInserts.ingredients}))");
@@ -269,7 +269,7 @@ namespace NutriTEC_API.Controllers
         }
 
         [HttpPost("nutri_search_recipe")]
-        public async Task<ActionResult<JSON_Object>> GetRecipe(RecipeId recipe_Id)
+        public async Task<ActionResult<JSON_Object>> NutriGetRecipe(RecipeId recipe_Id)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
             var result = _context.SearchRecipe.FromSqlInterpolated($"select * from search_recipe({recipe_Id.recipe_id})");
@@ -288,7 +288,7 @@ namespace NutriTEC_API.Controllers
         }
 
         [HttpPut("nutri_update_recipe")]
-        public async Task<ActionResult<JSON_Object>> UpdateRecipe(RecipeData recipeData)
+        public async Task<ActionResult<JSON_Object>> NutriUpdateRecipe(RecipeData recipeData)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
             var result = _context.UpdateRecipe.FromSqlInterpolated($"select * from update_recipe({recipeData.recipe_id},{recipeData.portions},{recipeData.calories},{recipeData.ingredients})");
@@ -308,7 +308,7 @@ namespace NutriTEC_API.Controllers
         }
 
         [HttpPost("nutri_search_product")]
-        public async Task<ActionResult<JSON_Object>> SearchProduct(ProductIdentifier product_Id)
+        public async Task<ActionResult<JSON_Object>> NutriSearchProduct(ProductIdentifier product_Id)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
             var result = _context.ProductIdentifiers.FromSqlInterpolated($"select * from search_recipe({product_Id.barcode})");
