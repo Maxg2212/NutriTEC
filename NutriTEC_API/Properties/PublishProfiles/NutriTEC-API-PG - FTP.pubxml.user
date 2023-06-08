@@ -8,7 +8,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAK4lU/HySTkCJ4s+j9B9RIAAAAAACAAAAAAAQZgAAAAEAACAAAAArNQ1QiVjEvytbq0aTHq7ni2TuxGDEZ6qRcdwDvGCxrQAAAAAOgAAAAAIAACAAAABNT9vab7RHMzAuczD9tz3Ku87I6NDuaHQ+WVsVO04YCoAAAAC4af9PZGoPinXclLv2utbpbV0Uw+nXMWNQ09PVl7RtdmNVB7/HYhKwuJAq/kRA0cjXY5kgHs5j+Rkpyo/GTWpu1pkGEEU2oHzVEYMIPRiahUH7OURCg2fQ4OZdvvNl+b5DuW/V+jVQeS3vdSdsP+ASgNRTiwZ8GdZPsGYsKmasB0AAAAA+AwdS4JHKqqCGT3lQMheuWT/xtelKtTsp++afaOk1ilHxgEAW/dv+5IpSqadhNkEzOttLbLVKd3m3eBWJ0Nf+</EncryptedPassword>
     <_PublishTargetUrl>ftps://waws-prod-blu-233.ftp.azurewebsites.windows.net/site/wwwroot</_PublishTargetUrl>
-    <History>True|2023-06-07T03:57:48.2532940Z;False|2023-06-06T21:53:26.5021046-06:00;False|2023-06-06T00:53:48.5843653-06:00;</History>
+    <History>True|2023-06-08T02:01:09.3307421Z;False|2023-06-07T19:59:04.2969141-06:00;True|2023-06-07T19:09:16.0706519-06:00;True|2023-06-07T18:28:46.7069149-06:00;True|2023-06-06T21:57:48.2532940-06:00;False|2023-06-06T21:53:26.5021046-06:00;False|2023-06-06T00:53:48.5843653-06:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -64,16 +64,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/24/2023 09:22:08</publishTime>
     </File>
     <File Include="NutriTEC_API.deps.json">
-      <publishTime>06/06/2023 21:56:56</publishTime>
+      <publishTime>06/07/2023 20:00:19</publishTime>
     </File>
     <File Include="NutriTEC_API.dll">
-      <publishTime>06/06/2023 21:56:51</publishTime>
+      <publishTime>06/07/2023 20:00:14</publishTime>
     </File>
     <File Include="NutriTEC_API.exe">
-      <publishTime>06/06/2023 21:56:51</publishTime>
+      <publishTime>06/07/2023 20:00:14</publishTime>
     </File>
     <File Include="NutriTEC_API.pdb">
-      <publishTime>06/06/2023 21:56:51</publishTime>
+      <publishTime>06/07/2023 20:00:14</publishTime>
     </File>
     <File Include="NutriTEC_API.runtimeconfig.json">
       <publishTime>06/06/2023 21:52:48</publishTime>
@@ -88,7 +88,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/16/2021 06:54:30</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>06/06/2023 21:56:56</publishTime>
+      <publishTime>06/07/2023 20:00:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

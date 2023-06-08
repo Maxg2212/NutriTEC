@@ -14,6 +14,7 @@ namespace NutriTEC_API.Controllers
         {
             _context = context;
         }
+        //*****************************Login*****************************88
         [HttpPost("auth_nutritionist")]
         public async Task<ActionResult<JSON_Object>> AuthNutritionist(Credentials Nutritionist_Credentials)
         {
@@ -33,6 +34,7 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        //*******************Registro**************
         [HttpPost("add_nutritionist")]
         public async Task<ActionResult<JSON_Object>> AddNutritionist(NutritionistData Nutritionist_Data)
         {
@@ -54,6 +56,7 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        //****************************Gestion planes************************8
         [HttpPost("create_eating_plan")]
         public async Task<ActionResult<JSON_Object>> AddEatingPlan(EatingPlanFunction eatingPlanEntries)
         {
@@ -92,7 +95,7 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-
+        //******************************Asignación de planes**************
         [HttpPost("assign_daily_consump")]
         public async Task<ActionResult<JSON_Object>> AssignDailyConsumption(DailyConsumptionFunction dailyConsumptionEntries)
         {
@@ -101,6 +104,159 @@ namespace NutriTEC_API.Controllers
             var PGSQL_result = result.ToList();
 
             if (PGSQL_result[0].assign_daily_consumption == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+
+        [HttpPost("assign_product_to_recipe")]
+        public async Task<ActionResult<JSON_Object>> AssignProductToRecipe(ProductToRecipeFunction productRecipeFunctionEntries)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.AssignProductToRecipes.FromSqlInterpolated($"select * from assign_product_to_recipe({productRecipeFunctionEntries.barcode},{productRecipeFunctionEntries.recipe_id}))");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].assign_product_to_recipe == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+        [HttpPut("delete_recipe_from_nutri")]
+        public async Task<ActionResult<JSON_Object>> DeleteRecipeFromNutri(RecipeIdentifier productRecipeFunctionEntries)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.DeleteRecipeFunctions.FromSqlInterpolated($"select * from delete_recipe({productRecipeFunctionEntries.recipe_id}))");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].delete_recipe == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+        [HttpPost("get_client_eating_plan")]
+        public async Task<ActionResult<JSON_Object>> GetClientEatingPlan(ClientIdentifier clientIdentifier)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.GetClientEatingPlans.FromSqlInterpolated($"select * from get_client_eating_plan({clientIdentifier.client_id}))");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].get_client_eating_plan == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+        [HttpPost("get_eating_plan")]
+        public async Task<ActionResult<JSON_Object>> GetEatingPlan(EatingPlanIdentifier eatingPlanIdentifier)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.GetEatingPlans.FromSqlInterpolated($"select * from get_eating_plan({eatingPlanIdentifier.eatplan_id}))");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].get_eating_plan == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+        [HttpPost("get_products_by_recipe")]
+        public async Task<ActionResult<JSON_Object>> GetProductsByRecipe(RecipeIdentifier recipeIdentifier)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.GetProductsByRecipes.FromSqlInterpolated($"select * from get_products_by_recipe({recipeIdentifier.recipe_id}))");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].get_products_by_recipe == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+        [HttpPost("insert_product_dish")]
+        public async Task<ActionResult<JSON_Object>> InsertProductDish(ProductDishInserts productDishInserts)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.ProductDishFunctions.FromSqlInterpolated($"select * from insert_product_dish({productDishInserts.barcode},{productDishInserts.vitamins},{productDishInserts.calcium},{productDishInserts.iron},{productDishInserts.description},{productDishInserts.portion_size},{productDishInserts.energy},{productDishInserts.fat},{productDishInserts.sodium},{productDishInserts.carbs},{productDishInserts.protein},{productDishInserts.state}))");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].insert_product_dish == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+        [HttpPost("insert_recipe")]
+        public async Task<ActionResult<JSON_Object>> InsertProductRecipe(RecipeInserts recipeInserts)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.InsertRecipeFunctions.FromSqlInterpolated($"select * from insert_recipe({recipeInserts.recipe_id},{recipeInserts.portions},{recipeInserts.calories},{recipeInserts.ingredients}))");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].insert_recipe == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+        [HttpPost("search_client")]
+        public async Task<ActionResult<JSON_Object>> SearchClient(ClientIdentifier clientInserts)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.SearchClients.FromSqlInterpolated($"select * from search_client({clientInserts.client_id}))");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].search_client == 1)
             {
                 json.status = "ok";
                 return Ok(json);

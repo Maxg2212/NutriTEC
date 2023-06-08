@@ -15,13 +15,13 @@ namespace NutriTEC_API.Models
 
         public string lname1 { get; set; } = string.Empty;
 
-        public string? lname2 { get; set; }
+        public string lname2 { get; set; } = string.Empty;
 
         public string password { get; set; } = string.Empty;
 
         public string bdate { get; set; } = string.Empty;
 
-        public string? profile_pic { get; set; }
+        public string profile_pic { get; set; } = string.Empty;
 
         public string credit_card { get; set; } = string.Empty;
 
@@ -31,7 +31,7 @@ namespace NutriTEC_API.Models
 
         public string weight { get; set; } = string.Empty;
 
-        public string? address { get; set; }
+        public string address { get; set; } = string.Empty;
 
         public string payment_type { get; set; } = string.Empty;
 
