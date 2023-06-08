@@ -175,5 +175,25 @@ namespace NutriTEC_API.Controllers
 
         }
 
+        [HttpGet("client_get_aproved_product_dish")]
+        public async Task<ActionResult<JSON_Object>> GetAproved()
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.AllProductDishes.FromSqlInterpolated($"select * from get_aproved_products()");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result.Count == 0)
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                json.status = "ok";
+                json.result = PGSQL_result;
+                return Ok(json);
+
+            }
+        }
+
     }
 }
