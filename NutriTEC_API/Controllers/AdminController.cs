@@ -114,7 +114,6 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-        [HttpGet("get_all_products_dishes")]
         [HttpGet("get_rejected_product_dish")]
         public async Task<ActionResult<JSON_Object>> GetRejected()
         {

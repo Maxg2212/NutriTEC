@@ -230,7 +230,7 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-        [HttpPost("insert_recipe")]
+        [HttpPost("nutri_insert_recipe")]
         public async Task<ActionResult<JSON_Object>> InsertProductRecipe(RecipeInserts recipeInserts)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
@@ -249,7 +249,7 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-        [HttpPost("search_client")]
+        [HttpPost("nutri_search_client")]
         public async Task<ActionResult<JSON_Object>> SearchClient(ClientIdentifier clientInserts)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
@@ -268,7 +268,7 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-        [HttpPost("search_recipe")]
+        [HttpPost("nutri_search_recipe")]
         public async Task<ActionResult<JSON_Object>> GetRecipe(RecipeId recipe_Id)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
@@ -287,7 +287,7 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-        [HttpPut("update_recipe")]
+        [HttpPut("nutri_update_recipe")]
         public async Task<ActionResult<JSON_Object>> UpdateRecipe(RecipeData recipeData)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
@@ -307,7 +307,7 @@ namespace NutriTEC_API.Controllers
 
         }
 
-        [HttpPost("search_product")]
+        [HttpPost("nutri_search_product")]
         public async Task<ActionResult<JSON_Object>> SearchProduct(ProductIdentifier product_Id)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
