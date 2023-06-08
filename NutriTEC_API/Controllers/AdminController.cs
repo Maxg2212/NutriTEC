@@ -74,7 +74,7 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-        [HttpPost("get_aproved_product_dish")]
+        [HttpGet("get_aproved_product_dish")]
         public async Task<ActionResult<JSON_Object>> GetAproved()
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
@@ -94,7 +94,7 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-        [HttpPost("get_unaproved_product_dish")]
+        [HttpGet("get_unaproved_product_dish")]
         public async Task<ActionResult<JSON_Object>> GetUnaproved()
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
@@ -114,7 +114,7 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-        [HttpPost("get_all_products_dishes")]
+        [HttpGet("get_all_products_dishes")]
         public async Task<ActionResult<JSON_Object>> GetAllProducts()
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.

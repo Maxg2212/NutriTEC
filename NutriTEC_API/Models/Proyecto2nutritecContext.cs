@@ -65,6 +65,13 @@ public partial class Proyecto2nutritecContext : DbContext
 
     public virtual DbSet<AssignDailyConsumption> AssignDailyConsumptions { get; set; }
 
+    public virtual DbSet<RecipeData> SearchRecipe { get; set;}
+
+    public virtual DbSet<InsertRecipe> InsertRecipe { get; set; }
+
+    public virtual DbSet<UpdateRecipe> UpdateRecipe { get; set; }
+
+    public virtual DbSet<DeleteRecipe> DeleteRecipe { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
