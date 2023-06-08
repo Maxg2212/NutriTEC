@@ -65,6 +65,18 @@ public partial class Proyecto2nutritecContext : DbContext
 
     public virtual DbSet<AssignDailyConsumption> AssignDailyConsumptions { get; set; }
 
+    public virtual DbSet<RecipeData> SearchRecipe { get; set;}
+
+    public virtual DbSet<InsertRecipe> InsertRecipe { get; set; }
+
+    public virtual DbSet<UpdateRecipe> UpdateRecipe { get; set; }
+
+    public virtual DbSet<DeleteRecipe> DeleteRecipe { get; set; }
+
+    public virtual DbSet<EatingPlanFunction> ClientEatingPlan { get; set; }
+
+    public virtual DbSet<NutritionistByClientData> GetNutritionistByClientData { get; set; }
+
     public virtual DbSet<AssignEatingPlanClient> AssignEatingPlanClients { get; set; }
 
     
