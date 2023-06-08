@@ -267,5 +267,103 @@ namespace NutriTEC_API.Controllers
                 return BadRequest(json);
             }
         }
+
+        [HttpPost("search_recipe")]
+        public async Task<ActionResult<JSON_Object>> GetRecipe(RecipeId recipe_Id)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.SearchRecipe.FromSqlInterpolated($"select * from search_recipe({recipe_Id.recipe_id})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result.Count == 0)
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                json.status = "ok";
+                json.result = PGSQL_result[0];
+                return Ok(json);
+            }
+        }
+
+        [HttpPut("update_recipe")]
+        public async Task<ActionResult<JSON_Object>> UpdateRecipe(RecipeData recipeData)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.UpdateRecipe.FromSqlInterpolated($"select * from update_recipe({recipeData.recipe_id},{recipeData.portions},{recipeData.calories},{recipeData.ingredients})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].update_recipe == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+
+        }
+
+        [HttpPost("search_product")]
+        public async Task<ActionResult<JSON_Object>> SearchProduct(ProductIdentifier product_Id)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.ProductIdentifiers.FromSqlInterpolated($"select * from search_recipe({product_Id.barcode})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result.Count == 0)
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                json.status = "ok";
+                json.result = PGSQL_result[0];
+                return Ok(json);
+            }
+        }
+
+        [HttpPut("update_client_measurements")]
+        public async Task<ActionResult<JSON_Object>> UpdateClientMeasurements(ClientMeasurements clientMeasurements)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.UpdateClientMeasurements.FromSqlInterpolated($"select * from update_client_measurements({clientMeasurements.client_id},{clientMeasurements.muslce_percentage},{clientMeasurements.fat_percentage},{clientMeasurements.hip_size},{clientMeasurements.waist_size},{clientMeasurements.neck_size},{clientMeasurements.last_month_meas})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].update_client_measurements == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+
+        }
+
+        [HttpPut("update_product")]
+        public async Task<ActionResult<JSON_Object>> UpdateProduct(ProductUpdated productUpdated)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.UpdateProductFunctions.FromSqlInterpolated($"select * from update_product({productUpdated.barcode},{productUpdated.vitamins},{productUpdated.calcium},{productUpdated.iron},{productUpdated.description},{productUpdated.portion_size},{productUpdated.energy}, {productUpdated.fat}, {productUpdated.sodium},{productUpdated.carbs},{productUpdated.protein})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].update_product == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+
+        }
     }
 }
