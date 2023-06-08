@@ -3,8 +3,8 @@
 namespace NutriTEC_API.Models
 {
     [Keyless]
-    public class ClientIdentifier
+    public class EmployeeIdentifier
     {
-        public string client_id { get; set; } = string.Empty;
+        public string employee_id { get; set; } = string.Empty;
     }
 }

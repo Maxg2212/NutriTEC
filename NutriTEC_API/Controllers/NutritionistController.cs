@@ -474,5 +474,66 @@ namespace NutriTEC_API.Controllers
             }
 
         }
+
+        [HttpPost("get_nutritionist_plan")]
+        public async Task<ActionResult<JSON_Object>> GetNutritionistPlan(NutritionistIdentifier nutriID)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.GetNutritionistByClientData.FromSqlInterpolated($"select * from get_nutritionist_plan({nutriID.nutritionist_id})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result.Count == 0)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+
+        }
+
+        [HttpPost("get_client_by_nutritionist")]
+        public async Task<ActionResult<JSON_Object>> GetClientByNutritionist(NutritionistIdentifier nutriID)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.GetNutritionistByClientData.FromSqlInterpolated($"select * from get_nutritionist_plan({nutriID.nutritionist_id})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result.Count == 0)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+
+        }
+
+        [HttpPost("get_eatplan_by_nutritionist")]
+        public async Task<ActionResult<JSON_Object>> GetEatplanByNutritionist(EmployeeIdentifier employeeIdentifier)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.EmployeeIdentifiers.FromSqlInterpolated($"select * from get_eatplan_by_nutritionist({employeeIdentifier.employee_id})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result.Count == 0)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+
+        }
+
     }
 }
