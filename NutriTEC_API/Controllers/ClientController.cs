@@ -195,5 +195,25 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+
+        [HttpPost("client_get_eating_plan")]
+        public async Task<ActionResult<JSON_Object>> GetClientEatingPlan(ClientId client_id)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.ClientEatingPlan.FromSqlInterpolated($"select * from get_client_eating_plan({client_id.client_id})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result.Count == 0)
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                json.status = "ok";
+                json.result = PGSQL_result[0];
+                return Ok(json);
+            }
+        }
+
     }
 }
