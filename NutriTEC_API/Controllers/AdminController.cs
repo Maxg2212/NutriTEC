@@ -15,6 +15,13 @@ namespace NutriTEC_API.Controllers
             _context = context;
         }
 
+
+        /// <summary>
+        /// Method that validates the credentials from the administrator.
+        /// </summary>
+        /// <param name="Admin_Credentials">The credentials of the administrator.</param>
+        /// <returns>All the information of the administrator.</returns>
+        /// <remarks>This method queries a database to get the data.</remarks>
         [HttpPost("auth_admin")]
         public async Task<ActionResult<JSON_Object>> AuthAdmin(Credentials Admin_Credentials)
         {
@@ -35,6 +42,12 @@ namespace NutriTEC_API.Controllers
 
         }
 
+        /// <summary>
+        /// Method that signs up an administrator.
+        /// </summary>
+        /// <param name="Admin_Credentials">All administrator information to add to the database.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to add the administrator.</remarks>
         [HttpPost("add_admin")]
         public async Task<ActionResult<JSON_Object>> AddAdmin(Credentials Admin_Credentials)
         {
@@ -55,7 +68,13 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-            [HttpPut("change_state_product_dish")]
+        /// <summary>
+        /// Method that updates the state of a product.
+        /// </summary>
+        /// <param name="ProductDishData">Product's identifier and state that is going to be modified.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to update a products's state .</remarks>
+        [HttpPut("change_state_product_dish")]
         public async Task<ActionResult<JSON_Object>> ChangeState(ProductDishData ProductDishData)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
@@ -74,6 +93,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that obtains the approved products.
+        /// </summary>
+        /// <param> None. </param>
+        /// <returns>A table containing info of approved products.</returns>
+        /// <remarks>This method queries a database to get the approved products.</remarks>
         [HttpGet("get_aproved_product_dish")]
         public async Task<ActionResult<JSON_Object>> GetAproved()
         {
@@ -93,7 +118,12 @@ namespace NutriTEC_API.Controllers
                 
             }
         }
-
+        /// <summary>
+        /// Method that obtains the unapproved products.
+        /// </summary>
+        /// <param> None. </param>
+        /// <returns>A table containing info of unapproved products.</returns>
+        /// <remarks>This method queries a database to get the unapproved products.</remarks>
         [HttpGet("get_unaproved_product_dish")]
         public async Task<ActionResult<JSON_Object>> GetUnaproved()
         {
@@ -114,6 +144,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that obtains the rejected products.
+        /// </summary>
+        /// <param> None. </param>
+        /// <returns>A table containing info of rejected products.</returns>
+        /// <remarks>This method queries a database to get the rejected products.</remarks>
         [HttpGet("get_rejected_product_dish")]
         public async Task<ActionResult<JSON_Object>> GetRejected()
         {
@@ -134,6 +170,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that obtains the all products.
+        /// </summary>
+        /// <param> None. </param>
+        /// <returns>A table containing info of all products.</returns>
+        /// <remarks>This method queries a database to get all products.</remarks>
         [HttpGet("get_all_products_dishes")]
         public async Task<ActionResult<JSON_Object>> GetAllProducts()
         {

@@ -66,7 +66,6 @@ public partial class Proyecto2nutritecContext : DbContext
     public virtual DbSet<AssignDailyConsumption> AssignDailyConsumptions { get; set; }
 
     public virtual DbSet<AssignEatingPlanClient> AssignEatingPlanClients { get; set; }
-
     
     public virtual DbSet<AssignProductToRecipe> AssignProductToRecipes { get; set; }
 

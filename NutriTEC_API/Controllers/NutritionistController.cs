@@ -15,6 +15,13 @@ namespace NutriTEC_API.Controllers
             _context = context;
         }
         //*****************************Login*****************************88
+
+        /// <summary>
+        /// Method that validates the credentials from the nutritionist.
+        /// </summary>
+        /// <param name="Nutritionist_Credentials">The credentials of the nutritionist.</param>
+        /// <returns>All the information of the nutritionist.</returns>
+        /// <remarks>This method queries a database to get the data.</remarks>
         [HttpPost("auth_nutritionist")]
         public async Task<ActionResult<JSON_Object>> AuthNutritionist(Credentials Nutritionist_Credentials)
         {
@@ -35,6 +42,12 @@ namespace NutriTEC_API.Controllers
         }
 
         //*******************Registro**************
+        /// <summary>
+        /// Method that signs up a nutritionist.
+        /// </summary>
+        /// <param name="Nutritionist_Data">All nutritionist information to add to the database.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to add the nutritionist.</remarks>
         [HttpPost("add_nutritionist")]
         public async Task<ActionResult<JSON_Object>> AddNutritionist(NutritionistData Nutritionist_Data)
         {
@@ -57,6 +70,13 @@ namespace NutriTEC_API.Controllers
         }
 
         //****************************Gestion planes************************8
+
+        /// <summary>
+        /// Method that adds a eating plan.
+        /// </summary>
+        /// <param name="eatingPlanEntries">All eating plan information to add to the database.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to add eating plan.</remarks>
         [HttpPost("create_eating_plan")]
         public async Task<ActionResult<JSON_Object>> AddEatingPlan(EatingPlanFunction eatingPlanEntries)
         {
@@ -75,7 +95,12 @@ namespace NutriTEC_API.Controllers
                 return BadRequest(json);
             }
         }
-
+        /// <summary>
+        /// Method that assigns an eating plan to a client.
+        /// </summary>
+        /// <param name="eatingPlanToClientEntries">All information to add to the database.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to assign the eating plan to a client.</remarks>
         [HttpPost("assign_eating_plan_to_client")]
         public async Task<ActionResult<JSON_Object>> AssignEatingPlanToClient(EatingPlanToClient eatingPlanToClientEntries)
         {
@@ -96,6 +121,12 @@ namespace NutriTEC_API.Controllers
         }
 
         //******************************Asignación de planes**************
+        /// <summary>
+        /// Method that assigns a daily consumption to the database, this method can be performed by nutritionist and client.
+        /// </summary>
+        /// <param name="dailyConsumptionEntries">All daily consumption information to add to the database.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to assign the daily consumption.</remarks>
         [HttpPost("assign_daily_consump")]
         public async Task<ActionResult<JSON_Object>> AssignDailyConsumption(DailyConsumptionFunction dailyConsumptionEntries)
         {
@@ -115,7 +146,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Method that assigns a product to recipe.
+        /// </summary>
+        /// <param name="productRecipeFunctionEntries">Product and recipe identifiers.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to assign the product to recipe.</remarks>
         [HttpPost("assign_product_to_recipe")]
         public async Task<ActionResult<JSON_Object>> AssignProductToRecipe(ProductToRecipeFunction productRecipeFunctionEntries)
         {
@@ -135,6 +171,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that deletes a recipe, this method can be performed by nutritionist and client.
+        /// </summary>
+        /// <param name="productRecipeFunctionEntries">Recipe identifier.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to delete recipe.</remarks>
         [HttpPut("delete_recipe_from_nutri")]
         public async Task<ActionResult<JSON_Object>> DeleteRecipeFromNutri(RecipeIdentifier productRecipeFunctionEntries)
         {
@@ -154,6 +196,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that obtains the eating plan of a client.
+        /// </summary>
+        /// <param name="clientIdentifier">Client identifier to obtain their eating plan.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to get the client's eating plan.</remarks>
         [HttpPost("get_client_eating_plan")]
         public async Task<ActionResult<JSON_Object>> GetClientEatingPlan(ClientIdentifier clientIdentifier)
         {
@@ -173,6 +221,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that obtains the eating plan.
+        /// </summary>
+        /// <param name="eatingPlanIdentifier">Eating Plan identifier to obtain all info from it.</param>
+        /// <returns>A table containing all the eating plan info.</returns>
+        /// <remarks>This method queries a database to get the eating plan.</remarks>
         [HttpPost("get_eating_plan")]
         public async Task<ActionResult<JSON_Object>> GetEatingPlan(EatingPlanIdentifier eatingPlanIdentifier)
         {
@@ -191,7 +245,14 @@ namespace NutriTEC_API.Controllers
                 return BadRequest(json);
             }
         }
-        
+
+
+        /// <summary>
+        /// Method that obtains the products by recipe.
+        /// </summary>
+        /// <param name="recipeIdentifier">Recipe identifier to obtain all info from it.</param>
+        /// <returns>A table containing all the products related to that recipe.</returns>
+        /// <remarks>This method queries a database to get the products by recipe.</remarks>
         [HttpPost("get_products_by_recipe")]
         public async Task<ActionResult<JSON_Object>> GetProductsByRecipe(RecipeIdentifier recipeIdentifier)
         {
@@ -210,7 +271,13 @@ namespace NutriTEC_API.Controllers
                 return BadRequest(json);
             }
         }
-        
+
+        /// <summary>
+        /// Method that inserts a product.
+        /// </summary>
+        /// <param name="productDishInserts">All product data to to insert into the database.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to insert the product.</remarks>
         [HttpPost("insert_product_dish")]
         public async Task<ActionResult<JSON_Object>> InsertProductDish(ProductDishInserts productDishInserts)
         {
@@ -230,6 +297,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that inserts a recipe.
+        /// </summary>
+        /// <param name="recipeInserts">All recipe data to to insert into the database.</param>
+        /// <returns>A confirmation message..</returns>
+        /// <remarks>This method queries a database to insert the recipe.</remarks>
         [HttpPost("nutri_insert_recipe")]
         public async Task<ActionResult<JSON_Object>> NutriInsertProductRecipe(RecipeInserts recipeInserts)
         {
@@ -249,6 +322,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that searches a client.
+        /// </summary>
+        /// <param name="clientInserts">A client identifier to get their info from the database.</param>
+        /// <returns>A table containing a client's info.</returns>
+        /// <remarks>This method queries a database to search a client.</remarks>
         [HttpPost("nutri_search_client")]
         public async Task<ActionResult<JSON_Object>> SearchClient(ClientIdentifier clientInserts)
         {
@@ -268,6 +347,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that searches a recipe, this method can be performed by the nutritionist and the client.
+        /// </summary>
+        /// <param name="recipe_Id">A recipe identifier to get its info from the database.</param>
+        /// <returns>A table containing a recipe's info.</returns>
+        /// <remarks>This method queries a database to search a recipe.</remarks>
         [HttpPost("nutri_search_recipe")]
         public async Task<ActionResult<JSON_Object>> NutriGetRecipe(RecipeId recipe_Id)
         {
@@ -287,6 +372,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that updates a recipe, this method can be performed by the nutritionist and the client.
+        /// </summary>
+        /// <param name="recipeData">All recipe data that is going to be modified.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to update a recipe.</remarks>
         [HttpPut("nutri_update_recipe")]
         public async Task<ActionResult<JSON_Object>> NutriUpdateRecipe(RecipeData recipeData)
         {
@@ -307,6 +398,12 @@ namespace NutriTEC_API.Controllers
 
         }
 
+        /// <summary>
+        /// Method that searches a product.
+        /// </summary>
+        /// <param name="product_Id">Product's identifieer to obtain all its info.</param>
+        /// <returns>A table containing all product's info.</returns>
+        /// <remarks>This method queries a database to search a product.</remarks>
         [HttpPost("nutri_search_product")]
         public async Task<ActionResult<JSON_Object>> NutriSearchProduct(ProductIdentifier product_Id)
         {
@@ -326,6 +423,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that updates a client's measurements, this can be performed by nutritionist and client.
+        /// </summary>
+        /// <param name="clientMeasurements">All client's data that is going to be modified.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to update a client's measurements.</remarks>
         [HttpPut("update_client_measurements")]
         public async Task<ActionResult<JSON_Object>> UpdateClientMeasurements(ClientMeasurements clientMeasurements)
         {
@@ -346,6 +449,12 @@ namespace NutriTEC_API.Controllers
 
         }
 
+        /// <summary>
+        /// Method that updates a product.
+        /// </summary>
+        /// <param name="productUpdated">All product's data that is going to be modified.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to update a products's information .</remarks>
         [HttpPut("update_product")]
         public async Task<ActionResult<JSON_Object>> UpdateProduct(ProductUpdated productUpdated)
         {

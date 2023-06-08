@@ -17,6 +17,13 @@ namespace NutriTEC_API.Controllers
         {
             _context = context;
         }
+
+        /// <summary>
+        /// Method that validates the credentials from the client.
+        /// </summary>
+        /// <param name="Client_Credentials">The credentials of the client.</param>
+        /// <returns>All the information of the administrator.</returns>
+        /// <remarks>This method queries a database to get the data.</remarks>
         [HttpPost("auth_client")]
         public async Task<ActionResult<JSON_Object>> AuthClient(Credentials Client_Credentials)
         {
@@ -37,6 +44,12 @@ namespace NutriTEC_API.Controllers
 
         }
 
+        /// <summary>
+        /// Method that signs up a client.
+        /// </summary>
+        /// <param name="Client_Info">All client's information to add to the database.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to add the client.</remarks>
         [HttpPost("add_client")]
         public async Task<ActionResult<JSON_Object>> AddClient(ClientData Client_Info)
         {
@@ -56,7 +69,12 @@ namespace NutriTEC_API.Controllers
                 return BadRequest(json);
             }
         }
-
+        /// <summary>
+        /// Method that updates a client's measurements, this can be performed by nutritionist and client.
+        /// </summary>
+        /// <param name="Client_Info">All client's data that is going to be modified.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to update a client's measurements.</remarks>
         [HttpPut("update_measures")]
         public async Task<ActionResult<JSON_Object>> UpdateMeasures(ClientMeasures Client_Info)
         {
@@ -77,6 +95,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that assigns a daily consumption to the database, this method can be performed by nutritionist and client.
+        /// </summary>
+        /// <param name="dailyConsumptionEntries">All daily consumption information to add to the database.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to assign the daily consumption.</remarks>
         [HttpPost("assign_daily_consumption")]
         public async Task<ActionResult<JSON_Object>> AssignDailyConsumption(DailyConsumptionFunction dailyConsumptionEntries)
         {
@@ -96,7 +120,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Method that searches a recipe, this method can be performed by the nutritionist and the client.
+        /// </summary>
+        /// <param name="recipe_Id">A recipe identifier to get its info from the database.</param>
+        /// <returns>A table containing a recipe's info.</returns>
+        /// <remarks>This method queries a database to search a recipe.</remarks>
         [HttpPost("search_recipe")]
         public async Task<ActionResult<JSON_Object>> GetRecipe(RecipeId recipe_Id)
         {
@@ -116,6 +145,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that inserts a recipe.
+        /// </summary>
+        /// <param name="recipeData">All recipe data to to insert into the database.</param>
+        /// <returns>A confirmation message..</returns>
+        /// <remarks>This method queries a database to insert the recipe.</remarks>
         [HttpPost("insert_recipe")]
         public async Task<ActionResult<JSON_Object>> InsertRecipe(RecipeData recipeData)
         {
@@ -135,6 +170,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Method that updates a recipe, this method can be performed by the nutritionist and the client.
+        /// </summary>
+        /// <param name="recipeData">All recipe data that is going to be modified.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to update a recipe.</remarks>
         [HttpPut("update_recipe")]
         public async Task<ActionResult<JSON_Object>> UpdateRecipe(RecipeData recipeData)
         {
@@ -155,6 +196,13 @@ namespace NutriTEC_API.Controllers
 
         }
 
+
+        /// <summary>
+        /// Method that deletes a recipe, this method can be performed by nutritionist and client.
+        /// </summary>
+        /// <param name="recipe_Id">Recipe identifier.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to delete recipe.</remarks>
         [HttpPut("delete_recipe")]
         public async Task<ActionResult<JSON_Object>> DeleteRecipe(RecipeId recipe_Id)
         {
@@ -175,6 +223,12 @@ namespace NutriTEC_API.Controllers
 
         }
 
+        /// <summary>
+        /// Method that obtains the approved products.
+        /// </summary>
+        /// <param> None. </param>
+        /// <returns>A table containing info of approved products.</returns>
+        /// <remarks>This method queries a database to get the approved products.</remarks>
         [HttpGet("client_get_aproved_product_dish")]
         public async Task<ActionResult<JSON_Object>> GetAproved()
         {
@@ -195,7 +249,12 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Method that obtains the eating plan of a client.
+        /// </summary>
+        /// <param name="client_id">Client identifier to obtain their eating plan.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to get the client's eating plan.</remarks>
         [HttpPost("client_get_eating_plan")]
         public async Task<ActionResult<JSON_Object>> GetClientEatingPlan(ClientId client_id)
         {
@@ -216,6 +275,12 @@ namespace NutriTEC_API.Controllers
         }
 
 
+        /// <summary>
+        /// Method that obtains the nutritionist of a client.
+        /// </summary>
+        /// <param name="client_id">Client identifier to obtain their nutritionist.</param>
+        /// <returns>A confimation note or an error.</returns>
+        /// <remarks>This method queries a database to get the client's nutritionist.</remarks>
         [HttpPost("get_nutritionist_by_client")]
         public async Task<ActionResult<JSON_Object>> GetNutritionistByClient(ClientId client_id)
         {
