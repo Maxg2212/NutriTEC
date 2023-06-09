@@ -530,7 +530,7 @@ namespace NutriTEC_API.Controllers
             {
                 
                 json.status = "ok";
-                json.result = PGSQL_result[0];
+                json.result = PGSQL_result;
                 return Ok(json);
             }
 
