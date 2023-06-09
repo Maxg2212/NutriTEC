@@ -337,7 +337,7 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> InsertProductDish(ProductDishInserts productDishInserts)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.ProductDishFunctions.FromSqlInterpolated($"select * from insert_product_dish({productDishInserts.barcode},{productDishInserts.vitamins},{productDishInserts.calcium},{productDishInserts.iron},{productDishInserts.description},{productDishInserts.portion_size},{productDishInserts.energy},{productDishInserts.fat},{productDishInserts.sodium},{productDishInserts.carbs},{productDishInserts.protein},{productDishInserts.state}))");
+            var result = _context.ProductDishFunctions.FromSqlInterpolated($"select * from insert_product_dish({productDishInserts.barcode},{productDishInserts.vitamins},{productDishInserts.calcium},{productDishInserts.iron},{productDishInserts.description},{productDishInserts.portion_size},{productDishInserts.energy},{productDishInserts.fat},{productDishInserts.sodium},{productDishInserts.carbs},{productDishInserts.protein})");
             var PGSQL_result = result.ToList();
 
             if (PGSQL_result[0].insert_product_dish == 1)
@@ -349,6 +349,32 @@ namespace NutriTEC_API.Controllers
             else
             {
                 return BadRequest(json);
+            }
+        }
+
+
+        /// <summary>
+        /// Method that searches a product.
+        /// </summary>
+        /// <param name="product_Id">Product's identifieer to obtain all its info.</param>
+        /// <returns>A table containing all product's info.</returns>
+        /// <remarks>This method queries a database to search a product.</remarks>
+        [HttpPost("client_search_product")]
+        public async Task<ActionResult<JSON_Object>> NutriSearchProduct(ProductIdentifier product_Id)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.NutriSearchProducts.FromSqlInterpolated($"select * from search_product({product_Id.barcode})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result.Count == 0)
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                json.status = "ok";
+                json.result = PGSQL_result[0];
+                return Ok(json);
             }
         }
 
