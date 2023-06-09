@@ -203,12 +203,12 @@ namespace NutriTEC_API.Controllers
         /// <returns>A confimation note or an error.</returns>
         /// <remarks>This method queries a database to get the client's eating plan.</remarks>
         [HttpPost("get_client_eating_plan")]
-        public async Task<ActionResult<JSON_Object>> GetClientEatingPlan(ClientIdentifier clientIdentifier)
+        public async Task<ActionResult<JSON_Object>> GetClientEatingPlan(ClientId clientIdentifier)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
             var result = _context.GetClientEatingPlans.FromSqlInterpolated($"select * from get_client_eating_plan({clientIdentifier.client_id}))");
             var PGSQL_result = result.ToList();
-
+            
             if (PGSQL_result[0].get_client_eating_plan == 1)
             {
                 json.status = "ok";
@@ -329,7 +329,7 @@ namespace NutriTEC_API.Controllers
         /// <returns>A table containing a client's info.</returns>
         /// <remarks>This method queries a database to search a client.</remarks>
         [HttpPost("nutri_search_client")]
-        public async Task<ActionResult<JSON_Object>> SearchClient(ClientIdentifier clientInserts)
+        public async Task<ActionResult<JSON_Object>> SearchClient(ClientId clientInserts)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
             var result = _context.SearchClients.FromSqlInterpolated($"select * from search_client({clientInserts.client_id}))");

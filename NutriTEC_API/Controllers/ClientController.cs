@@ -300,5 +300,59 @@ namespace NutriTEC_API.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Method that updates a product.
+        /// </summary>
+        /// <param name="productUpdated">All product's data that is going to be modified.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to update a products's information .</remarks>
+        [HttpPut("client_update_product")]
+        public async Task<ActionResult<JSON_Object>> UpdateProduct(ProductUpdated productUpdated)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.UpdateProductFunctions.FromSqlInterpolated($"select * from update_product({productUpdated.barcode},{productUpdated.vitamins},{productUpdated.calcium},{productUpdated.iron},{productUpdated.description},{productUpdated.portion_size},{productUpdated.energy}, {productUpdated.fat}, {productUpdated.sodium},{productUpdated.carbs},{productUpdated.protein})");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].update_product == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+
+        }
+
+        /// <summary>
+        /// Method that inserts a product.
+        /// </summary>
+        /// <param name="productDishInserts">All product data to to insert into the database.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to insert the product.</remarks>
+        [HttpPost("client_insert_product_dish")]
+        public async Task<ActionResult<JSON_Object>> InsertProductDish(ProductDishInserts productDishInserts)
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.ProductDishFunctions.FromSqlInterpolated($"select * from insert_product_dish({productDishInserts.barcode},{productDishInserts.vitamins},{productDishInserts.calcium},{productDishInserts.iron},{productDishInserts.description},{productDishInserts.portion_size},{productDishInserts.energy},{productDishInserts.fat},{productDishInserts.sodium},{productDishInserts.carbs},{productDishInserts.protein},{productDishInserts.state}))");
+            var PGSQL_result = result.ToList();
+
+            if (PGSQL_result[0].insert_product_dish == 1)
+            {
+                json.status = "ok";
+                return Ok(json);
+
+            }
+            else
+            {
+                return BadRequest(json);
+            }
+        }
+
+
+
     }
 }
