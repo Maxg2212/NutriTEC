@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NutriTEC_API.Models;
+using PdfSharpCore;
+using PdfSharpCore.Pdf;
+using System.Reflection.PortableExecutable;
+using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 namespace NutriTEC_API.Controllers
 {
@@ -194,6 +198,62 @@ namespace NutriTEC_API.Controllers
                 return Ok(json);
 
             }
+        }
+
+        [HttpGet("get_payment_report")]
+        public async Task<ActionResult<JSON_Object>> GetPaymentReport()
+        {
+            JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
+            var result = _context.PaymentReports.FromSqlInterpolated($"select * from payment_report()");
+            var PGSQL_result = result.ToList();
+            var document = new PdfDocument();
+            string html = "<div style='width:100%; text-align:center'>";
+            html += "<h3>   AdminReport  </h3>";
+            html += "<div>";
+            html += "<table style ='width:100%; border: 1px solid #000'>";
+            html += "<thead style='font-weight:bold'>";
+            html += "<tr>";
+            html += "<td style='border:1px solid #000'>  payment_type </td>";
+            html += "<td style='border:1px solid #000'>  email </td>";
+            html += "<td style='border:1px solid #000'>  name </td>";
+            html += "<td style='border:1px solid #000'>  second_name </td >";
+            html += "<td style='border:1px solid #000'> lname1 </td>";
+            html += "<td style='border:1px solid #000'> lname2 </td>";
+            html += "<td style='border:1px solid #000'> credit_card </td>";
+            html += "<td style='border:1px solid #000'> discount </td>";
+            html += "<td style='border:1px solid #000'> total_amount </td>";
+            html += "<td style='border:1px solid #000'> final_amount </td>";
+            html += "</tr>";
+            html += "</thead >";
+
+            html += "<tbody>";
+            
+            foreach (var item in PGSQL_result)
+            {
+                html += "<tr>";
+                html += "<td>" + item.payment_type + "</td>";
+                html += "<td>" + item.email + "</td>";
+                html += "<td>" + item.name + "</td >";
+                html += "<td>" + item.second_name + "</td >";
+                html += "<td>" + item.lname1 + "</td>";
+                html += "<td> " + item.lname2 + "</td >";
+                html += "<td> " + item.credit_card + "</td >";
+                html += "<td> " + item.discount + "</td >";
+                html += "<td> " + item.total_amount + "</td >";
+                html += "<td> " + item.final_amount + "</td >";
+                html += "</tr>";
+            }
+            html += "</tbody>";
+
+            PdfGenerator.AddPdfPages(document, html, PageSize.A3);
+            byte[]? response = null;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                document.Save(stream);
+                response = stream.ToArray();
+            }
+            string filename = $"{"paymentreport"}.pdf";
+            return File(response, "application/pdf", filename);
         }
 
     }

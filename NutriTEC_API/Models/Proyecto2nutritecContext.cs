@@ -113,6 +113,8 @@ public partial class Proyecto2nutritecContext : DbContext
     public virtual DbSet<NutriSearchProduct> NutriSearchProducts { get; set; }
 
     public virtual DbSet<GetNutritionistPlan> GetNutritionistPlans { get; set; }
+
+    public virtual DbSet<PaymentReport> PaymentReports { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseNpgsql("Host=nutritec-posgresql-db.postgres.database.azure.com;Database=proyecto2nutritec;Username=dlurena24;Password=Max12345");

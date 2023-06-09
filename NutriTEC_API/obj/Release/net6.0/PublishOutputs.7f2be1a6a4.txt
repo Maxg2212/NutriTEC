@@ -19,6 +19,12 @@ C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\Nu
 C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
 C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\Npgsql.dll
 C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\PdfSharpCore.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\HtmlRenderer.Core.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\HtmlRenderer.PdfSharp.Core.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\SixLabors.Core.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\SixLabors.Fonts.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\SixLabors.ImageSharp.dll
 C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll

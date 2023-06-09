@@ -106,3 +106,9 @@ C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\Nu
 C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\System.Text.Encodings.Web.dll
 C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\System.Text.Json.dll
 C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\PdfSharpCore.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\HtmlRenderer.Core.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\HtmlRenderer.PdfSharp.Core.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\SixLabors.Core.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\SixLabors.Fonts.dll
+C:\Users\maxga\OneDrive\Documentos\Cursos CE\Bases de Datos S1.2023\Proyecto2\NutriTEC\NutriTEC_API\bin\Release\net6.0\SixLabors.ImageSharp.dll
