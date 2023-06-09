@@ -481,7 +481,12 @@ namespace NutriTEC_API.Controllers
 
         }
 
-        //*********************sigue en pruebas***************************
+        /// <summary>
+        /// Method that selects a nutritionist_plan.
+        /// </summary>
+        /// <param name="nutriID">All nutritionist's data that is going to be searched.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to select ids of nutritionist and client .</remarks>
         [HttpPost("get_nutritionist_plan")]
         public async Task<ActionResult<JSON_Object>> GetNutritionistPlan(NutritionistIdentifier nutriID)
         {
@@ -503,6 +508,12 @@ namespace NutriTEC_API.Controllers
 
         }
 
+        /// <summary>
+        /// Method that selects client's information.
+        /// </summary>
+        /// <param name="nutriID">All client's data that is going to be selected.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to get a client's information .</remarks>
         [HttpPost("get_client_by_nutritionist")]
         public async Task<ActionResult<JSON_Object>> GetClientByNutritionist(NutritionistIdentifier nutriID)
         {
@@ -525,6 +536,12 @@ namespace NutriTEC_API.Controllers
 
         }
 
+        /// <summary>
+        /// Method that gets a product.
+        /// </summary>
+        /// <param name="employeeIdentifier">All employee's data that is going to be selected.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks>This method queries a database to get a eating plan's information .</remarks>
         [HttpPost("get_eatplan_by_nutritionist")]
         public async Task<ActionResult<JSON_Object>> GetEatplanByNutritionist(EmployeeIdentifier employeeIdentifier)
         {
