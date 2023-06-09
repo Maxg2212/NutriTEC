@@ -80,10 +80,10 @@ namespace NutriTEC_API.Controllers
         {
 
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.InsertClient.FromSqlInterpolated($"select * from update_client_measurements({Client_Info.client_id},{Client_Info.muslce_percentage}, {Client_Info.fat_percentage},{Client_Info.hip_size},{Client_Info.waist_size},{Client_Info.neck_size},{Client_Info.last_month_meas})");
+            var result = _context.UpdateClientMeasurements.FromSqlInterpolated($"select * from update_client_measurements({Client_Info.client_id},{Client_Info.muslce_percentage}, {Client_Info.fat_percentage},{Client_Info.hip_size},{Client_Info.waist_size},{Client_Info.neck_size},{Client_Info.last_month_meas})");
             var PGSQL_result = result.ToList();
 
-            if (PGSQL_result[0].insert_client == 1)
+            if (PGSQL_result[0].update_client_measurements == 1)
             {
                 json.status = "ok";
                 return Ok(json);

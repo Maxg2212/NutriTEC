@@ -27,6 +27,6 @@ namespace NutriTEC_API.Models
 
         public string protein { get; set; } = string.Empty;
 
-        public int state { get; set; } = 0;
+        public int state { get; set; }
     }
 }

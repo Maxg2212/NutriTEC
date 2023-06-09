@@ -156,7 +156,7 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> AssignProductToRecipe(ProductToRecipeFunction productRecipeFunctionEntries)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.AssignProductToRecipes.FromSqlInterpolated($"select * from assign_product_to_recipe({productRecipeFunctionEntries.barcode},{productRecipeFunctionEntries.recipe_id}))");
+            var result = _context.AssignProductToRecipes.FromSqlInterpolated($"select * from assign_product_to_recipe({productRecipeFunctionEntries.barcode},{productRecipeFunctionEntries.recipe_id})");
             var PGSQL_result = result.ToList();
 
             if (PGSQL_result[0].assign_product_to_recipe == 1)
@@ -181,7 +181,7 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> DeleteRecipeFromNutri(RecipeIdentifier productRecipeFunctionEntries)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.DeleteRecipeFunctions.FromSqlInterpolated($"select * from delete_recipe({productRecipeFunctionEntries.recipe_id}))");
+            var result = _context.DeleteRecipeFunctions.FromSqlInterpolated($"select * from delete_recipe({productRecipeFunctionEntries.recipe_id})");
             var PGSQL_result = result.ToList();
 
             if (PGSQL_result[0].delete_recipe == 1)
@@ -206,18 +206,20 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> GetClientEatingPlan(ClientId clientIdentifier)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.GetClientEatingPlans.FromSqlInterpolated($"select * from get_client_eating_plan({clientIdentifier.client_id}))");
+            var result = _context.GetClientEatingPlans.FromSqlInterpolated($"select * from get_client_eating_plan({clientIdentifier.client_id})");
             var PGSQL_result = result.ToList();
             
-            if (PGSQL_result[0].get_client_eating_plan == 1)
+            if (PGSQL_result.Count == 0)
             {
-                json.status = "ok";
-                return Ok(json);
+                return BadRequest(json);
 
             }
             else
             {
-                return BadRequest(json);
+                
+                json.status = "ok";
+                json.result = PGSQL_result[0];
+                return Ok(json);
             }
         }
 
@@ -231,18 +233,19 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> GetEatingPlan(EatingPlanIdentifier eatingPlanIdentifier)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.GetEatingPlans.FromSqlInterpolated($"select * from get_eating_plan({eatingPlanIdentifier.eatplan_id}))");
+            var result = _context.GetEatingPlans.FromSqlInterpolated($"select * from get_eating_plan({eatingPlanIdentifier.eatplan_id})");
             var PGSQL_result = result.ToList();
 
-            if (PGSQL_result[0].get_eating_plan == 1)
+            if (PGSQL_result.Count == 0)
             {
-                json.status = "ok";
-                return Ok(json);
+                return BadRequest(json);
 
             }
             else
             {
-                return BadRequest(json);
+                json.status = "ok";
+                json.result = PGSQL_result[0];
+                return Ok(json);
             }
         }
 
@@ -257,18 +260,19 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> GetProductsByRecipe(RecipeIdentifier recipeIdentifier)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.GetProductsByRecipes.FromSqlInterpolated($"select * from get_products_by_recipe({recipeIdentifier.recipe_id}))");
+            var result = _context.GetProductsByRecipes.FromSqlInterpolated($"select * from get_products_by_recipe({recipeIdentifier.recipe_id})");
             var PGSQL_result = result.ToList();
 
-            if (PGSQL_result[0].get_products_by_recipe == 1)
+            if (PGSQL_result.Count == 0)
             {
-                json.status = "ok";
-                return Ok(json);
+                return BadRequest(json);
 
             }
             else
             {
-                return BadRequest(json);
+                json.status = "ok";
+                json.result = PGSQL_result[0];
+                return Ok(json);
             }
         }
 
@@ -282,7 +286,7 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> InsertProductDish(ProductDishInserts productDishInserts)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.ProductDishFunctions.FromSqlInterpolated($"select * from insert_product_dish({productDishInserts.barcode},{productDishInserts.vitamins},{productDishInserts.calcium},{productDishInserts.iron},{productDishInserts.description},{productDishInserts.portion_size},{productDishInserts.energy},{productDishInserts.fat},{productDishInserts.sodium},{productDishInserts.carbs},{productDishInserts.protein},{productDishInserts.state}))");
+            var result = _context.ProductDishFunctions.FromSqlInterpolated($"select * from insert_product_dish({productDishInserts.barcode},{productDishInserts.vitamins},{productDishInserts.calcium},{productDishInserts.iron},{productDishInserts.description},{productDishInserts.portion_size},{productDishInserts.energy},{productDishInserts.fat},{productDishInserts.sodium},{productDishInserts.carbs},{productDishInserts.protein})");
             var PGSQL_result = result.ToList();
 
             if (PGSQL_result[0].insert_product_dish == 1)
@@ -307,7 +311,7 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> NutriInsertProductRecipe(RecipeInserts recipeInserts)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.InsertRecipeFunctions.FromSqlInterpolated($"select * from insert_recipe({recipeInserts.recipe_id},{recipeInserts.portions},{recipeInserts.calories},{recipeInserts.ingredients}))");
+            var result = _context.InsertRecipeFunctions.FromSqlInterpolated($"select * from insert_recipe({recipeInserts.recipe_id},{recipeInserts.portions},{recipeInserts.calories},{recipeInserts.ingredients})");
             var PGSQL_result = result.ToList();
 
             if (PGSQL_result[0].insert_recipe == 1)
@@ -332,18 +336,18 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> SearchClient(ClientId clientInserts)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.SearchClients.FromSqlInterpolated($"select * from search_client({clientInserts.client_id}))");
+            var result = _context.SearchClients.FromSqlInterpolated($"select * from search_client({clientInserts.client_id})");
             var PGSQL_result = result.ToList();
 
-            if (PGSQL_result[0].search_client == 1)
-            {
-                json.status = "ok";
-                return Ok(json);
-
-            }
-            else
+            if (PGSQL_result.Count == 0)
             {
                 return BadRequest(json);
+            }
+            else
+            {               
+                json.status = "ok";
+                json.result = PGSQL_result[0];
+                return Ok(json);
             }
         }
 
@@ -362,10 +366,12 @@ namespace NutriTEC_API.Controllers
 
             if (PGSQL_result.Count == 0)
             {
+
                 return BadRequest(json);
             }
             else
             {
+                
                 json.status = "ok";
                 json.result = PGSQL_result[0];
                 return Ok(json);
@@ -408,7 +414,7 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> NutriSearchProduct(ProductIdentifier product_Id)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.ProductIdentifiers.FromSqlInterpolated($"select * from search_recipe({product_Id.barcode})");
+            var result = _context.NutriSearchProducts.FromSqlInterpolated($"select * from search_product({product_Id.barcode})");
             var PGSQL_result = result.ToList();
 
             if (PGSQL_result.Count == 0)
@@ -475,22 +481,24 @@ namespace NutriTEC_API.Controllers
 
         }
 
+        //*********************sigue en pruebas***************************
         [HttpPost("get_nutritionist_plan")]
         public async Task<ActionResult<JSON_Object>> GetNutritionistPlan(NutritionistIdentifier nutriID)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.GetNutritionistByClientData.FromSqlInterpolated($"select * from get_nutritionist_plan({nutriID.nutritionist_id})");
+            var result = _context.GetNutritionistPlans.FromSqlInterpolated($"select * from get_nutritionist_plan({nutriID.nutritionist_id})");
             var PGSQL_result = result.ToList();
 
             if (PGSQL_result.Count == 0)
             {
-                json.status = "ok";
-                return Ok(json);
+                return BadRequest(json);
 
             }
             else
-            {
-                return BadRequest(json);
+            {               
+                json.status = "ok";
+                json.result = PGSQL_result[0];
+                return Ok(json);
             }
 
         }
@@ -499,18 +507,20 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> GetClientByNutritionist(NutritionistIdentifier nutriID)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.GetNutritionistByClientData.FromSqlInterpolated($"select * from get_nutritionist_plan({nutriID.nutritionist_id})");
+            var result = _context.GetClientByNutritionists.FromSqlInterpolated($"select * from get_client_by_nutritionist({nutriID.nutritionist_id})");
             var PGSQL_result = result.ToList();
 
             if (PGSQL_result.Count == 0)
             {
-                json.status = "ok";
-                return Ok(json);
+                return BadRequest(json);
 
             }
             else
             {
-                return BadRequest(json);
+                
+                json.status = "ok";
+                json.result = PGSQL_result[0];
+                return Ok(json);
             }
 
         }
@@ -519,18 +529,20 @@ namespace NutriTEC_API.Controllers
         public async Task<ActionResult<JSON_Object>> GetEatplanByNutritionist(EmployeeIdentifier employeeIdentifier)
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
-            var result = _context.EmployeeIdentifiers.FromSqlInterpolated($"select * from get_eatplan_by_nutritionist({employeeIdentifier.employee_id})");
+            var result = _context.GetEatplanByNutritionists.FromSqlInterpolated($"select * from get_eatplan_by_nutritionist({employeeIdentifier.employee_id})");
             var PGSQL_result = result.ToList();
 
             if (PGSQL_result.Count == 0)
             {
-                json.status = "ok";
-                return Ok(json);
+                return BadRequest(json);
 
             }
             else
             {
-                return BadRequest(json);
+                
+                json.status = "ok";
+                json.result = PGSQL_result[0];
+                return Ok(json);
             }
 
         }
