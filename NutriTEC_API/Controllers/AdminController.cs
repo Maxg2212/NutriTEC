@@ -200,7 +200,7 @@ namespace NutriTEC_API.Controllers
             }
         }
 
-        [HttpGet("get_payment_report")]
+        [HttpGet("get_payment_report/{payment_type}/{email}/{name}/{second_name}/{lname1}/{lname2}/{credit_card}/{discount}/{total_amount}/{final_amount}")]
         public async Task<ActionResult<JSON_Object>> GetPaymentReport()
         {
             JSON_Object json = new JSON_Object("error", null); //Se inicializa con error y null para ver si hay algun error.
